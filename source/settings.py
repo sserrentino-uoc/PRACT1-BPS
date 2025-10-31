@@ -1,4 +1,4 @@
-DEFAULT_UA = "UOC-PRACT1/1.0 (+contacto@tu-mail.edu)"
+DEFAULT_UA = "UOC-PRACT1/1.0 (sserrentino@uoc.edu)"
 REQUEST_TIMEOUT = 20
 DEFAULT_DELAY_SEC = 2.0
 MAX_RETRIES = 3

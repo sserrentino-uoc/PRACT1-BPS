@@ -6,6 +6,7 @@ from .parse_series import parse_desempleo, parse_recaudacion
 
 def main():
     ap = argparse.ArgumentParser(prog="PRACT1-BPS")
+    # El destino es 'cmd'
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     p_robots = sub.add_parser("robots", help="Verifica robots.txt en hosts relevantes")
@@ -22,17 +23,22 @@ def main():
     p_rec = sub.add_parser("recaudacion", help="Descarga y parsea XLS de II. Recaudación")
     p_rec.add_argument("--xls-url", required=True)
     p_rec.add_argument("--sheet", default=None)
-
+    
     args = ap.parse_args()
 
     if args.cmd == "robots":
         check_all()
     elif args.cmd == "index":
         crawl_index(pages=args.pages, delay=args.delay, max_pages=args.max_pages)
+    
     elif args.cmd == "desempleo":
+        # Llamamos a la función sin 'logger' (usará el default)
         parse_desempleo(args.xls_url, sheet=args.sheet)
+
     elif args.cmd == "recaudacion":
+        # Usamos args.cmd (no args.command) y quitamos 'logger'
         parse_recaudacion(args.xls_url, sheet=args.sheet)
+
     else:
         ap.print_help(); sys.exit(1)
 
