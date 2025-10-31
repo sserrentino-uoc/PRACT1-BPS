@@ -5,3 +5,10 @@
 2025-10-30 20:23:38,306 [INFO] [HEAD] https://bps.gub.uy/robots.txt -> 404
 2025-10-30 20:23:38,368 [INFO] [GET ] https://bps.gub.uy/robots.txt -> 404 text/html; charset=iso-8859-1
 2025-10-30 20:23:38,370 [INFO] Si no hay robots.txt público, se aplica 'polite crawling' por defecto.
+2025-10-31 15:01:47,224 [INFO] [HEAD] https://observatorio.bps.gub.uy/robots.txt -> 404
+2025-10-31 15:01:47,272 [INFO] [GET ] https://observatorio.bps.gub.uy/robots.txt -> 404 text/html; charset=iso-8859-1
+2025-10-31 15:01:47,360 [INFO] [HEAD] https://www.bps.gub.uy/robots.txt -> 404
+2025-10-31 15:01:47,406 [INFO] [GET ] https://www.bps.gub.uy/robots.txt -> 404 text/html; charset=iso-8859-1
+2025-10-31 15:01:47,478 [INFO] [HEAD] https://bps.gub.uy/robots.txt -> 404
+2025-10-31 15:01:47,533 [INFO] [GET ] https://bps.gub.uy/robots.txt -> 404 text/html; charset=iso-8859-1
+2025-10-31 15:01:47,533 [INFO] Si no hay robots.txt público, se aplica 'polite crawling' por defecto.

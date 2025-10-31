@@ -291,3 +291,9 @@
 2025-10-31 13:51:17,281 [INFO] Columnas post-limpieza: ['     Prestaciones de terceros(2)']
 2025-10-31 14:14:30,972 [INFO] Descargado https://www.bps.gub.uy/bps/file/23303/1/i_ingresos-e-egresos-globales.xls -> 510976 bytes | Content-Type=application/vnd.ms-excel;charset=UTF-8
 2025-10-31 14:14:31,092 [INFO] Escribí 28 filas en dataset/reporte_ingresos_egresos_I_4.csv
+2025-10-31 15:08:18,352 [INFO] Descargado https://www.bps.gub.uy/bps/file/23304/1/ii_recaudacion.xls -> 810496 bytes | Content-Type=application/vnd.ms-excel;charset=UTF-8
+2025-10-31 15:08:18,354 [INFO] Detección de formato: kind=xls engine=xlrd
+2025-10-31 15:08:18,586 [INFO] Excel OK: hoja=II-0 header=7 cols=['Unnamed: 0', 'Unnamed: 1', 'Fecha', 'Privados', 'Públicos', 'Total']
+2025-10-31 15:08:18,589 [INFO] Columnas pre-limpieza: ['Unnamed: 0', 'Unnamed: 1', 'Fecha', 'Privados', 'Públicos', 'Total', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Promedio ', 'Variación']
+2025-10-31 15:08:18,589 [INFO] Columnas post-limpieza: ['Fecha', 'Privados', 'Públicos', 'Total', 'Promedio ', 'Variación']
+2025-10-31 15:08:18,621 [INFO] Escribí 24 filas en dataset/series_recaudacion.csv

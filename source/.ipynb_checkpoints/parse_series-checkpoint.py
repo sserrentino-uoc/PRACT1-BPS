@@ -212,19 +212,13 @@ def _read_table_like(bytes_buf, kind, engine, logger, sheet=None, header_hint=No
         return None
         
     def _try_read_html():
-        # (Pega tu función _try_read_html aquí, indentada)
-        pass
+        return None
 
     def _try_bs4_table(bytes_buf_local, logger_local):
-        # (Pega tu función _try_bs4_table aquí, indentada)
-        pass
+        return None
 
     def _try_read_csv():
-        # (Pega tu función _try_read_csv aquí, indentada)
-        pass
-    
-    # --- FIN DE FUNCIONES ANIDADAS ---
-
+        return None
 
     # --- Ruta principal de _read_table_like ---
     if kind in ("xlsx", "xls"):
