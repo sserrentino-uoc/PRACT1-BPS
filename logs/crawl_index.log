@@ -1,0 +1,37 @@
+2025-10-30 20:24:18,459 [WARNING] Fallo en https://www.bps.gub.uy/bps/observatorio/indicadores-de-la-seguridad-social.html: 404 Client Error: Not Found for url: https://www.bps.gub.uy/bps/observatorio/indicadores-de-la-seguridad-social.html
+2025-10-30 20:24:18,460 [INFO] Sleeping 2.0s
+2025-10-30 20:24:20,461 [INFO] Escribí 0 filas en dataset/indicadores_index.csv
+2025-10-30 20:26:25,927 [INFO] GET https://www.bps.gub.uy/1944/indicadores-de-la-seguridad-social.html -> 200
+2025-10-30 20:26:26,038 [INFO] Bloques candidatos detectados: 209
+2025-10-30 20:26:26,056 [INFO] Sleeping 2.0s
+2025-10-30 20:26:28,098 [INFO] GET https://www.bps.gub.uy/bps/estadisticas/cuadro.jsp?cuadro=2 -> 200
+2025-10-30 20:26:28,153 [INFO] Bloques candidatos detectados: 0
+2025-10-30 20:26:28,154 [INFO] Sleeping 2.0s
+2025-10-30 20:26:30,479 [INFO] GET https://www.bps.gub.uy/bps/observatorio/cuadro.jsp?contentid=12780 -> 200
+2025-10-30 20:26:30,703 [INFO] Bloques candidatos detectados: 0
+2025-10-30 20:26:30,704 [INFO] Sleeping 2.0s
+2025-10-30 20:26:32,706 [INFO] Escribí 8 filas en dataset/indicadores_index.csv
+2025-10-31 07:22:38,314 [INFO] GET https://www.bps.gub.uy/1944/indicadores-de-la-seguridad-social.html -> 200
+2025-10-31 07:22:38,446 [INFO] Bloques candidatos detectados: 320 (fase A)
+2025-10-31 07:22:38,551 [INFO] Sleeping 2.0s
+2025-10-31 07:22:40,683 [INFO] GET https://www.bps.gub.uy/bps/estadisticas/cuadro.jsp?cuadro=2 -> 200
+2025-10-31 07:22:40,744 [INFO] Bloques candidatos detectados: 120 (fase A)
+2025-10-31 07:22:40,785 [INFO] Enlaces directos a ficheros en cuadro.jsp: 1 (fase B)
+2025-10-31 07:22:40,786 [INFO] Sleeping 2.0s
+2025-10-31 07:22:43,504 [INFO] GET https://www.bps.gub.uy/bps/observatorio/cuadro.jsp?contentid=12780 -> 200
+2025-10-31 07:22:43,712 [INFO] Bloques candidatos detectados: 1641 (fase A)
+2025-10-31 07:22:43,872 [INFO] Enlaces directos a ficheros en cuadro.jsp: 272 (fase B)
+2025-10-31 07:22:43,888 [INFO] Sleeping 2.0s
+2025-10-31 07:22:45,912 [INFO] Escribí 273 filas en dataset/indicadores_index.csv
+2025-10-31 09:39:09,515 [INFO] GET https://www.bps.gub.uy/1944/indicadores-de-la-seguridad-social.html -> 200
+2025-10-31 09:39:09,613 [INFO] Bloques candidatos detectados: 320 (fase A)
+2025-10-31 09:39:09,672 [INFO] Sleeping 2.0s
+2025-10-31 09:39:11,747 [INFO] GET https://www.bps.gub.uy/bps/estadisticas/cuadro.jsp?cuadro=2 -> 200
+2025-10-31 09:39:11,757 [INFO] Bloques candidatos detectados: 120 (fase A)
+2025-10-31 09:39:11,766 [INFO] Enlaces directos a ficheros en cuadro.jsp: 1 (fase B)
+2025-10-31 09:39:11,766 [INFO] Sleeping 2.0s
+2025-10-31 09:39:14,361 [INFO] GET https://www.bps.gub.uy/bps/observatorio/cuadro.jsp?contentid=12780 -> 200
+2025-10-31 09:39:14,666 [INFO] Bloques candidatos detectados: 1641 (fase A)
+2025-10-31 09:39:14,880 [INFO] Enlaces directos a ficheros en cuadro.jsp: 272 (fase B)
+2025-10-31 09:39:14,896 [INFO] Sleeping 2.0s
+2025-10-31 09:39:16,911 [INFO] Escribí 273 filas en dataset/indicadores_index.csv
