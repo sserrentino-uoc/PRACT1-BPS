@@ -4,14 +4,14 @@
 **Última actualización:** 2025-10-31
 
 ## Integrantes
-- Sebastian Serrentino Mangino (Seba) – <colocar email UOC>
-- Alberto Mochon Paredes – <colocar email UOC>
+- Sebastian Serrentino Mangino – sserrentino@uoc.edu
+- Alberto Mochon Paredes – amochon@uoc.edu
 
 
 ## Estructura del repositorio
 ```
 .
-├─ source/                 # Código del scraper (CLI con subcomandos)
+├─ source/                 # Código del scrapper (CLI con subcomandos)
 │  ├─ main.py              # Punto de entrada: `python -m source.main <cmd>`
 │  ├─ crawl_index.py       # Descubrimiento/filtrado de enlaces
 │  ├─ parse_series.py      # Descarga y parsing de tablas (HTML/XLS(X))
@@ -39,16 +39,12 @@ pip install -r requirements.txt
 python -m source.main robots
 
 # 3) Índice (páginas institucionales)
-python -m source.main index \
-  --pages "https://www.bps.gub.uy/1944/indicadores-de-la-seguridad-social.html" \
-          "https://www.bps.gub.uy/bps/observatorio/cuadro.jsp?contentid=12780" \
-  --delay 2 --max-pages 3
+python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-la-seguridad-social.html" "https://www.bps.gub.uy/bps/observatorio/cuadro.jsp?contentid=12780" --delay 2 --max-pages 3
 
-# 4) Series (reemplaza <URL_XLS_...> por los enlaces reales del índice)
-python -m source.main desempleo   --xls-url "<URL_XLS_III_3>"
-python -m source.main recaudacion --xls-url "<URL_XLS_II>"
-- python -m source.main desempleo --xls-url "https://www.bps.gub.uy/bps/file/23307/1/iii_3_subsidio-por-desempleo.xls" --sheet "III.3.5 Altas Zona" 
-- python -m source.main recaudacion --xls-url "https://www.bps.gub.uy/bps/file/23304/1/ii_recaudacion.xls" --sheet "II-0" 
+# 4) Series (Se deben reemplazar las url's por los enlaces reales del índice)
+- python -m source.main desempleo|recaudacion --xls-url "enlace_real" --sheet "nombre_hoja"
+    - python -m source.main desempleo --xls-url "https://www.bps.gub.uy/bps/file/23307/1/iii_3_subsidio-por-desempleo.xls" --sheet "III.3.5 Altas Zona" 
+    - python -m source.main recaudacion --xls-url "https://www.bps.gub.uy/bps/file/23304/1/ii_recaudacion.xls" --sheet "II-0" 
 
 # 5) Validación rápida
 python source/validate.py
