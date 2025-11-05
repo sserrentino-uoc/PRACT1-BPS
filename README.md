@@ -4,14 +4,14 @@
 **Última actualización:** 2025-10-31
 
 ## Integrantes
-- Sebastian Serrentino Mangino (Seba) – <colocar email UOC>
-- Alberto Mochon Paredes – <colocar email UOC>
+- Sebastian Serrentino Mangino – sserrentino@uoc.edu
+- Alberto Mochon Paredes – amochon@uoc.edu
 
 
 ## Estructura del repositorio
 ```
 .
-├─ source/                 # Código del scraper (CLI con subcomandos)
+├─ source/                 # Código del scrapper (CLI con subcomandos)
 │  ├─ main.py              # Punto de entrada: `python -m source.main <cmd>`
 │  ├─ crawl_index.py       # Descubrimiento/filtrado de enlaces
 │  ├─ parse_series.py      # Descarga y parsing de tablas (HTML/XLS(X))
