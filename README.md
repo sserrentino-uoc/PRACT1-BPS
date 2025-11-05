@@ -35,7 +35,7 @@
 python -m venv .venv && . .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-# 2) Chequeo robots (log informativo)
+# 2) Chequeo robots (log informativo), verifica los archivos robots.txt de los dominios objetivo (TARGETS).
 python -m source.main robots
 
 # 3) Índice (páginas institucionales)
@@ -47,7 +47,8 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
     - python -m source.main recaudacion --xls-url "https://www.bps.gub.uy/bps/file/23304/1/ii_recaudacion.xls" --sheet "II-0" 
 
 # 5) Validación rápida
-python source/validate.py
+- python source/validate.py
+    - Si todo esta ok debe recibir el mensaje: "INFO: ✔✔✔ TODAS LAS VALIDACIONES PASARON ✔✔✔" 
 
 ## Zenodo (DOI)
 - **Depósito**: sube los CSV de `/dataset` y el `README.md` a un **nuevo registro** de Zenodo.

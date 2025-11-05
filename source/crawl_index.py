@@ -1,11 +1,26 @@
+"""
+Crawler del índice de indicadores.
+
+Este módulo se encarga de:
+1. Descargar las páginas de índice (HTML).
+2. Parsear el HTML para encontrar enlaces a archivos (PDF, XLS).
+3. Extraer metadatos de la página (Capítulo, Título, Fecha, Tamaño visible).
+4. Enriquecer los metadatos consultando el servidor (HEAD/GET Range)
+   para obtener el tamaño real y el nombre de archivo del header.
+5. Resolver y unificar el tamaño del archivo.
+6. Guardar todos los resultados en un archivo CSV.
+"""
+
 import re, csv, requests
 import email.utils as eut
 from urllib.parse import urlsplit, unquote
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, urljoin
+from datetime import datetime
+
 from .settings import DEFAULT_UA, REQUEST_TIMEOUT, DEFAULT_DELAY_SEC, BASE_INDEX_PAGES, OUT_DIR
 from .utils import make_logger, ensure_dirs, abs_url, clean_whitespace, polite_sleep, text2num
-from datetime import datetime
+
 
 ROMAN_TITLE_RE = re.compile(r"\b([IVX]+(?:\.\d+)?)\s+([^\(\|·\-\n]{3,120})", re.I)
 SIZE_RE = re.compile(r"\b(\d+(?:[\.,]\d+)?\s*(?:KB|MB|B))\b", re.I)
@@ -20,7 +35,16 @@ FILENAME_STAR_RE = re.compile(r"filename\*\s*=\s*([^']*)'[^']*'(.+)", re.I)  # R
 RANGE_RE = re.compile(r"bytes\s+\d+-\d+\/(\d+)", re.I)
 
 def _parse_content_disposition(cd: str) -> str:
-    """Devuelve filename del header Content-Disposition si existe."""
+    """
+    Devuelve el 'filename' del header Content-Disposition si existe.
+    Soporta 'filename=' (comillas) y 'filename*=' (RFC 5987).
+
+    Args:
+        cd (Optional[str]): El valor del header Content-Disposition.
+
+    Returns:
+        str: El nombre de archivo extraído, o "" si no se encuentra.
+    """
     if not cd:
         return ""
     # Soporta filename* (RFC5987) y filename=
@@ -43,9 +67,11 @@ def _parse_content_disposition(cd: str) -> str:
     return out
 
 def _is_clean_1024(n: int) -> bool:
+    """Comprueba si un número es un múltiplo "limpio" de 1024 (ej. 512.0 KB)."""
     return n % 1024 == 0 or (abs(n - round(n/1024)*1024) <= 512)
 
 def _human_bytes(n) -> str:
+    """Convierte bytes (int) a un string legible (KB, MB)."""
     if not n:
         return ""
     n = int(n)
@@ -56,6 +82,11 @@ def _human_bytes(n) -> str:
     return f"{n} B"
 
 def resolve_size(row: dict) -> dict:
+    """
+    Resuelve el tamaño final ('tamano_bytes') basado en las fuentes disponibles.
+    Prioridad: Servidor (server) > Página (page) > Aproximado (aprox).
+    Maneja la heurística de tamaños "redondeados" (ej. 512 KB).
+    """
     def as_int(x):
         try:
             return int(float(x))
@@ -90,6 +121,7 @@ def resolve_size(row: dict) -> dict:
     return row
 
 def _filename_from_url(u: str) -> str:
+    """Extrae el nombre de archivo de la URL (ej. .../archivo.pdf)."""
     try:
         path = urlsplit(u).path or ""
         base = path.rsplit("/", 1)[-1]
@@ -169,6 +201,18 @@ def _filename_from_headers(headers) -> str:
     return ""
 
 def _filename_from_url(u: str) -> str:
+    """
+    Extrae el nombre de archivo de la ruta de una URL.
+
+    Toma el último segmento de la ruta (ej. 'archivo.pdf' de
+    'https://sitio.com/path/archivo.pdf') y lo decodifica (unquote).
+
+    Args:
+        u (str): La URL completa.
+
+    Returns:
+        str: El nombre de archivo extraído de la URL, o "" si falla.
+    """
     try:
         path = urlsplit(u).path or ""
         base = path.rsplit("/", 1)[-1]
@@ -177,6 +221,20 @@ def _filename_from_url(u: str) -> str:
         return ""
 
 def _filename_from_cd(cd: str) -> str:
+    """
+    Extrae el nombre de archivo de un string Content-Disposition.
+
+    Busca patrones 'filename*=' (RFC 5987) o 'filename="..."'.
+
+    Nota: Esta es una de varias funciones en el archivo que intentan
+    parsear este header. '_parse_content_disposition' es más completa.
+
+    Args:
+        cd (str): El string completo del header Content-Disposition.
+
+    Returns:
+        str: El nombre de archivo encontrado, o "" si no se encuentra.
+    """
     if not cd:
         return ""
     # RFC 5987: filename*=UTF-8''...
@@ -240,12 +298,21 @@ def _probe_range_for_size(session, url: str, timeout: float):
 
 def augment_with_remote_meta(session, url: str, timeout=30):
     """
-    Devuelve dict con:
-      - size_bytes_server: int | None
-      - filename_header: str
-      - filename_final: str  (header si existe, si no, el de la URL)
-    Intenta primero HEAD (Content-Length / Content-Disposition).
-    Si no hay tamaño, hace un GET con Range: bytes=0-0 y lee Content-Range.
+    Obtiene metadatos (tamaño, nombre de archivo) del servidor.
+    
+    Intenta HEAD (Content-Length / Content-Disposition).
+    Si no hay tamaño, prueba un GET con Range: bytes=0-0 y lee Content-Range.
+
+    Args:
+        session (requests.Session): Sesión de requests.
+        url (str): URL del archivo a probar.
+        timeout (int): Timeout para las peticiones.
+
+    Returns:
+        Dict[str, Any]: Un diccionario con:
+            - "size_bytes_server" (int | None)
+            - "filename_header" (str)
+            - "filename_final" (str)
     """
     size_server, fname_hdr = None, ""
 
@@ -288,7 +355,6 @@ def augment_with_remote_meta(session, url: str, timeout=30):
     }
 
 
-# === NUEVOS HELPERS (pegarlos junto a los demás helpers del módulo) ===
 def _roman_from_href(href: str) -> str:
     """
     Intenta deducir el capítulo (I, II, III.3, etc.) a partir del nombre del archivo.
@@ -326,6 +392,17 @@ def _prefer_cap_by_href(cap_num: str, href: str) -> str:
     return cap_num
 
 def _text2bytes(tam_text: str) -> int | None:
+    """
+    Convierte un string de tamaño (ej. "1.2 MB") a bytes.
+
+    Nota: Esta función es muy similar a 'text2num' de utils.py.
+
+    Args:
+        tam_text (str): El string de tamaño (ej. "512 KB", "1,2 MB").
+
+    Returns:
+        int | None: El número de bytes, o None si no se pudo parsear.
+    """
     if not tam_text: return None
     txt = tam_text.replace(",", ".").strip().upper()
     m = re.search(r"([\d\.]+)\s*(KB|MB|B)", txt)
@@ -336,10 +413,24 @@ def _text2bytes(tam_text: str) -> int | None:
     return int(n)
 
 def _clean_spaces(s: str) -> str:
+    """
+    Limpia el exceso de espacios en blanco de un string.
+
+    Nota: Esta función es idéntica a 'clean_whitespace' de utils.py.
+
+    Args:
+        s (str): El string a limpiar.
+
+    Returns:
+        str: El string limpio.
+    """
     return re.sub(r"\s+", " ", s or "").strip()
 
 def _near_block(a):
-    # el mejor contexto suele estar en el padre <li>, <div>, o fila de tabla
+    """
+    Encuentra el texto "contextual" más cercano al ancla <a>.
+    El mejor contexto suele estar en el padre <li>, <div>, o fila <tr>.
+    """
     for tag in ("li","div","td","tr","p","article","section"):
         p = a.find_parent(tag)
         if p: 
@@ -348,6 +439,12 @@ def _near_block(a):
     return a.find_parent().get_text(" ", strip=True)
 
 def parse_index_page(page_url, html, rows, logger):
+    """
+    Parsea el HTML de una página de índice y extrae todos los enlaces
+    a PDF/XLS, junto con sus metadatos contextuales.
+
+    Modifica la lista 'rows' in-place.
+    """
     soup = BeautifulSoup(html, "lxml")
     anchors = soup.select("a[href]")
     total_links = 0
@@ -431,6 +528,21 @@ def parse_index_page(page_url, html, rows, logger):
                 page_url, total_links, kept_links)
 
 def scrape_index_page(session, page_url: str, logger):
+    """
+    Descarga y parsea una página de índice para extraer enlaces PDF/XLS.
+
+    Nota: Esta función es casi idéntica a 'parse_index_page' pero
+    descarga el contenido ella misma en lugar de recibirlo.
+
+    Args:
+        session (requests.Session): La sesión de requests para descargar.
+        page_url (str): La URL de la página de índice a crawlear.
+        logger (logging.Logger): El logger para registrar eventos.
+
+    Returns:
+        List[Dict[str, Any]]: Una lista de diccionarios (filas) con
+                              los metadatos extraídos.
+    """
     out_rows = []
     r = session.get(page_url, allow_redirects=True)
     r.raise_for_status()
@@ -535,6 +647,26 @@ def _head_size_and_name(session, url: str, timeout):
 
 def crawl_index(pages=None, out_csv=f"{OUT_DIR}/indicadores_index.csv",
                 delay=DEFAULT_DELAY_SEC, max_pages=10, log_dir="logs"):
+    """
+    Orquesta el proceso completo de crawling de índice.
+
+    1. Descarga las páginas de índice.
+    2. Parsea los enlaces y metadatos de la página.
+    3. Enriquece los metadatos con peticiones HEAD/Range.
+    4. Resuelve el tamaño final y de-duplica.
+    5. Escribe el archivo 'indicadores_index.csv'.
+
+    Args:
+        pages (Optional[List[str]], optional): Lista de URLs de índice.
+            Usa BASE_INDEX_PAGES de settings si es None.
+        out_csv (Path, optional): Ruta de salida del CSV.
+        delay (float, optional): Pausa entre descargas de páginas.
+        max_pages (int, optional): Límite de páginas de índice a descargar.
+        log_dir (Path, optional): Directorio para guardar logs.
+
+    Returns:
+        Path: La ruta al archivo CSV generado.
+    """
     ensure_dirs(OUT_DIR, log_dir)
     logger = make_logger(log_dir, "crawl_index")
     pages = pages or BASE_INDEX_PAGES
