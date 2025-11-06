@@ -61,7 +61,7 @@ Actuamos con “scraping responsable”: chequeo de `robots.txt` (ver `/logs/rob
 Trabajos previos del BPS y tableros del Observatorio; el dataset busca facilitar análisis reproducibles (PRACT2) sin depender de la navegación manual por múltiples páginas.
 
 ## 8. Licencia del dataset
-El dataset se publica en Zenodo bajo **CC0** para maximizar la reutilización académica y compatibilidad con PRACT2. (Justificación: datos agregados públicos, sin datos personales).
+Publicamos el dataset en Zenodo bajo CC0 1.0 (dominio público) para maximizar su reutilización académica y compatibilidad con PRACT2. Se trata de datos públicos y agregados, sin datos personales. Cita sugerida (Zenodo): Serrentino Mangino, S., & Mochón Paredes, A. (2025). Observatorio BPS – Indicadores index + Series (desempleo/recaudación) (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.17541918
 
 ## 9. Código y retos técnicos
 Código en `/source` con CLI (`python -m source.main <subcomando>`).  

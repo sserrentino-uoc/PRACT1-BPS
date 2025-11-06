@@ -1,9 +1,10 @@
+# Copyright (c) 2025 Serrentino Mangino, S., & Mochon Paredes, A.
+# Licensed under the MIT License. See LICENSE for details.
+
 import pandas as pd
 import sys
 import logging
 from typing import Set
-# re no se usaba, pero se puede mantener si se planea usar
-# import re 
 
 # Configurar un logger simple para mostrar los mensajes de validación
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')

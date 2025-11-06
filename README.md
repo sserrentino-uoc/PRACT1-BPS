@@ -62,10 +62,6 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
 - python -m source.main validate 
     - Si todo esta ok debe recibir el mensaje: "INFO: ✔✔✔ TODAS LAS VALIDACIONES PASARON ✔✔✔" 
 
-## Zenodo (DOI)
-- **DOI**: Serrentino Mangino, S., & Mochon Paredes, A. (2025, noviembre 6). Datos estadísticos del Banco de Previsión Social del Uruguay. Zenodo. https://doi.org/10.5281/zenodo.17541918.
-- **Licencia del dataset**: CC BY 4.0.
-
 ## Vídeo (≤10 min)
 - Incluir una demo corta: `robots → index → (desempleo|recaudacion|asignacion) → dataset → Zenodo`.
 - Ambos integrantes deben aparecer en algún momento.
@@ -85,3 +81,9 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
 ## Créditos / Propiedad intelectual
 - Autoría del código: integrantes.
 - Terceros: mencionar bibliografía, documentación y paquetes utilizados (licencias). Detallar en la **memoria**.
+
+## Licencia
+- **DOI**: Serrentino Mangino, S., & Mochon Paredes, A. (2025, octubre 30). Datos estadísticos del Banco de Previsión Social del Uruguay. 
+- **Datos** (`/dataset` y depósito Zenodo): **CC0 1.0** (dominio público). Se agradece citar el DOI: https://doi.org/10.5281/zenodo.17541918  
+- **Código** (`/source`): **MIT**.  Detalles en [`LICENSE.md`](./LICENSE.md).
+

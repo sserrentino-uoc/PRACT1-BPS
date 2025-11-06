@@ -1,3 +1,6 @@
+# Copyright (c) 2025 Serrentino Mangino, S., & Mochon Paredes, A.
+# Licensed under the MIT License. See LICENSE for details.
+
 from pathlib import Path  # <-- 1. Importar
 
 # (Necesitarías importar 'list' de 'typing' solo si usas Python < 3.9)
