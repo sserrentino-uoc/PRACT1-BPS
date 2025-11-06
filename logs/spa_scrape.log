@@ -1,0 +1,67 @@
+2025-11-05 21:17:12,600 [ERROR] Ha ocurrido un error durante la ejecución de Selenium:
+2025-11-05 21:17:12,601 [ERROR] SessionNotCreatedException: Message: session not created
+from unknown error: no chrome binary at C:\chrome-testing\chrome-win64\chrome.exe; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff79a237a05
+	0x7ff79a237a60
+	0x7ff799fb16ad
+	0x7ff799fedfb0
+	0x7ff799febbd9
+	0x7ff79a040a42
+	0x7ff79a040280
+	0x7ff799ffb068
+	0x7ff799ffbe93
+	0x7ff79a4f29a0
+	0x7ff79a4ece20
+	0x7ff79a50cc15
+	0x7ff79a25309e
+	0x7ff79a25ad8f
+	0x7ff79a240be4
+	0x7ff79a240d9f
+	0x7ff79a2267f8
+	0x7ffa6bfce8d7
+	0x7ffa6d8ac53c
+
+2025-11-05 21:17:37,067 [INFO] Driver de Selenium (Chrome) iniciado.
+2025-11-05 21:17:38,044 [INFO] Esperando 30s a que los azulejos sean visibles en https://observatorio.bps.gub.uy/#/...
+2025-11-05 21:17:38,850 [INFO] Encontrados 21 azulejos de datos. Extrayendo...
+2025-11-05 21:17:39,714 [INFO] --- Resultados del Scraping (SPA) ---
+2025-11-05 21:17:39,714 [INFO] - Prestaciones: 1.390.172
+2025-11-05 21:17:39,715 [INFO] - Jubilaciones: 506.111
+2025-11-05 21:17:39,715 [INFO] - Pensiones sobrevivencia: 224.587
+2025-11-05 21:17:39,715 [INFO] - Subsidio por desempleo: 41.156
+2025-11-05 21:17:39,716 [INFO] - Pensiones asistenciales: 96.666
+2025-11-05 21:17:39,716 [INFO] - Subsidio por enfermedad: 55.851
+2025-11-05 21:17:39,716 [INFO] - Asignaciones familiares: 461.824
+2025-11-05 21:17:39,716 [INFO] - Subsidio por maternidad: 3.977
+2025-11-05 21:17:39,717 [INFO] - Recaudación: 19.687
+2025-11-05 21:17:39,717 [INFO] - Empresas: 316.134
+2025-11-05 21:17:39,717 [INFO] - Puestos cotizantes: 1.558.570
+2025-11-05 21:17:39,718 [INFO] - Personas cotizantes: 1.334.104
+2025-11-05 21:17:39,718 [INFO] - Régimen general: 5.059
+2025-11-05 21:17:39,718 [INFO] ---------------------------------------
+2025-11-05 21:17:39,719 [INFO] ¡Éxito! Datos guardados en dataset\spa_dashboard_data.csv
+2025-11-05 21:17:39,719 [INFO] Cerrando el driver de Selenium...
+2025-11-05 21:17:41,990 [INFO] Driver cerrado.
+2025-11-05 21:22:37,566 [INFO] Driver de Selenium (Chrome) iniciado.
+2025-11-05 21:22:38,537 [INFO] Esperando 30s a que los azulejos sean visibles en https://observatorio.bps.gub.uy/#/...
+2025-11-05 21:22:39,366 [INFO] Encontrados 21 azulejos de datos. Extrayendo...
+2025-11-05 21:22:40,099 [INFO] --- Resultados del Scraping (SPA) ---
+2025-11-05 21:22:40,099 [INFO] - Prestaciones: 1.390.172
+2025-11-05 21:22:40,099 [INFO] - Jubilaciones: 506.111
+2025-11-05 21:22:40,099 [INFO] - Pensiones sobrevivencia: 224.587
+2025-11-05 21:22:40,099 [INFO] - Subsidio por desempleo: 41.156
+2025-11-05 21:22:40,100 [INFO] - Pensiones asistenciales: 96.666
+2025-11-05 21:22:40,100 [INFO] - Subsidio por enfermedad: 55.851
+2025-11-05 21:22:40,100 [INFO] - Asignaciones familiares: 461.824
+2025-11-05 21:22:40,100 [INFO] - Subsidio por maternidad: 3.977
+2025-11-05 21:22:40,100 [INFO] - Recaudación: 19.687
+2025-11-05 21:22:40,100 [INFO] - Empresas: 316.134
+2025-11-05 21:22:40,100 [INFO] - Puestos cotizantes: 1.558.570
+2025-11-05 21:22:40,101 [INFO] - Personas cotizantes: 1.334.104
+2025-11-05 21:22:40,101 [INFO] - Régimen general: 5.059
+2025-11-05 21:22:40,101 [INFO] ---------------------------------------
+2025-11-05 21:22:40,101 [INFO] ¡Éxito! Datos guardados en dataset\spa_dashboard_data.csv
+2025-11-05 21:22:40,101 [INFO] Cerrando el driver de Selenium...
+2025-11-05 21:22:42,378 [INFO] Driver cerrado.

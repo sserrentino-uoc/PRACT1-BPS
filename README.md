@@ -17,7 +17,8 @@
 │  ├─ parse_series.py      # Descarga y parsing de tablas (HTML/XLS(X))
 │  ├─ robots_check.py      # Verificación y registro de robots.txt
 │  ├─ settings.py          # Parámetros (UA, delays, timeouts, rutas)
-│  └─ utils.py             # Utilidades comunes
+│  ├─ utils.py             # Utilidades comunes
+│  └─ demo_spa.py          # Demostración para scraping de una SPA
 ├─ dataset/                # CSV listos para PRACT2 (y para Zenodo)
 ├─ logs/                   # Logs de ejecución (robots, index, descargas)
 ├─ docs/
@@ -35,6 +36,14 @@
 python -m venv .venv && . .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
+# 1.1) Navegador Chrome y Driver
+
+- Este script está configurado para buscar estos archivos en las siguientes rutas (modificar source/demo_spa.py si se instalan en otro lugar):
+    - Driver: C:\chrome-testing\chromedriver-win64\chromedriver.exe
+    - Navegador: C:\chrome-testing\chrome-win64\chrome.exe
+    - Fuente Chrome Driver:= https://storage.googleapis.com/chrome-for-testing-public/142.0.7444.61/win64/chromedriver-win64.zip
+    - Fuente Chrome:= https://storage.googleapis.com/chrome-for-testing-public/142.0.7444.61/win64/chrome-win64.zip
+
 # 2) Chequeo robots (log informativo), verifica los archivos robots.txt de los dominios objetivo (TARGETS).
 python -m source.main robots
 
@@ -46,8 +55,11 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
     - python -m source.main desempleo --xls-url "https://www.bps.gub.uy/bps/file/23307/1/iii_3_subsidio-por-desempleo.xls" --sheet "III.3.5 Altas Zona" 
     - python -m source.main recaudacion --xls-url "https://www.bps.gub.uy/bps/file/23304/1/ii_recaudacion.xls" --sheet "II-0" 
 
-# 5) Validación rápida
-- python source/validate.py
+# 5) Demostracion de SPA
+- python -m source.main spa 
+- 
+# 6) Validación rápida de los datos obtenidos por scrapping
+- python -m source.main validate 
     - Si todo esta ok debe recibir el mensaje: "INFO: ✔✔✔ TODAS LAS VALIDACIONES PASARON ✔✔✔" 
 
 ## Zenodo (DOI)

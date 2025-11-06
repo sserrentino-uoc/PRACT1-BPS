@@ -1,32 +1,32 @@
 """
-Punto de entrada principal para el proyecto de scraping de la PRACT1.
-
-Este script proporciona una interfaz de línea de comandos (CLI) para
-ejecutar las diferentes partes del proyecto:
-1. robots: Verifica los archivos robots.txt de los sitios.
-2. index: Crawlea el índice de indicadores.
-3. desempleo: Parsea un XLS de subsidio por desempleo.
-4. recaudacion: Parsea un XLS de recaudación.
+Punto de entrada principal para el proyecto de scraping del BPS.
+... (resto de tu docstring de módulo) ...
 """
 
-import argparse, sys
+# 1. Importaciones de la biblioteca estándar
+import argparse
+import sys
+
+# 3. Importaciones locales (de tu proyecto)
 from .settings import BASE_INDEX_PAGES, DEFAULT_DELAY_SEC
 from .robots_check import check_all
 from .crawl_index import crawl_index
 from .parse_series import parse_desempleo, parse_recaudacion
+from .demo_spa import scrape_spa_dashboard
+# --- 1. AÑADE LA IMPORTACIÓN DE VALIDATE ---
+from .validate import main as validate_main  # Renombramos 'main' a 'validate_main'
 
-def main():
+def main() -> None:
     """
     Función principal. 
-    
     Parsea los argumentos de la línea de comandos y ejecuta el 
-    sub-comando correspondiente (robots, index, desempleo, recaudacion).
+    sub-comando correspondiente.
     """
     ap = argparse.ArgumentParser(
         prog="PRACT1-BPS",
         description="Herramienta de scraping y parsing para indicadores del BPS."
     )
-    # Define el contenedor para los sub-comandos
+    
     sub = ap.add_subparsers(
         dest="cmd", 
         required=True,
@@ -45,21 +45,15 @@ def main():
         help="Crawlea el índice y genera indicadores_index.csv"
     )
     p_index.add_argument(
-        "--pages", 
-        nargs="*", 
-        default=BASE_INDEX_PAGES,
+        "--pages", nargs="*", default=BASE_INDEX_PAGES,
         help="Lista de URLs de índice a crawlear."
     )
     p_index.add_argument(
-        "--delay", 
-        type=float, 
-        default=DEFAULT_DELAY_SEC,
+        "--delay", type=float, default=DEFAULT_DELAY_SEC,
         help="Espera (en segundos) entre peticiones."
     )
     p_index.add_argument(
-        "--max-pages", 
-        type=int, 
-        default=10,
+        "--max-pages", type=int, default=10,
         help="Máximo de sub-páginas a explorar por cada página de índice."
     )
 
@@ -69,15 +63,11 @@ def main():
         help="Descarga y parsea XLS de III.3 Subsidio por desempleo"
     )
     p_des.add_argument(
-        "--xls-url", 
-        required=True, 
-        type=str,
+        "--xls-url", required=True, type=str,
         help="URL directa al archivo .xls/.xlsx"
     )
     p_des.add_argument(
-        "--sheet", 
-        default=None, 
-        type=str,
+        "--sheet", default=None, type=str,
         help="Nombre o índice (base 0) de la hoja a parsear (opcional)."
     )
 
@@ -87,23 +77,31 @@ def main():
         help="Descarga y parsea XLS de II. Recaudación"
     )
     p_rec.add_argument(
-        "--xls-url", 
-        required=True, 
-        type=str,
+        "--xls-url", required=True, type=str,
         help="URL directa al archivo .xls/.xlsx"
     )
     p_rec.add_argument(
-        "--sheet", 
-        default=None, 
-        type=str,
+        "--sheet", default=None, type=str,
         help="Nombre o índice (base 0) de la hoja a parsear (opcional)."
     )
+    
+    # --- Comando 'spa' ---
+    p_spa = sub.add_parser(
+        "spa",
+        help="Extrae datos del dashboard principal de la SPA (Observatorio)"
+    )
+    
+    # --- 2. AÑADE EL SUB-COMANDO 'validate' ---
+    p_val = sub.add_parser(
+        "validate",
+        help="Valida que todos los archivos CSV generados sean correctos."
+    )
+    
     
     # Parsea los argumentos de la línea de comandos
     args: argparse.Namespace = ap.parse_args()
 
     # --- Lógica de Despacho (Dispatch) ---
-    # Ejecuta la función correspondiente al comando
     
     if args.cmd == "robots":
         check_all()
@@ -120,9 +118,15 @@ def main():
 
     elif args.cmd == "recaudacion":
         parse_recaudacion(args.xls_url, sheet=args.sheet)
+        
+    elif args.cmd == "spa":
+        scrape_spa_dashboard()
+        
+    # --- 3. AÑADE LA LLAMADA A LA FUNCIÓN DE VALIDACIÓN ---
+    elif args.cmd == "validate":
+        validate_main()
 
     else:
-        # (Aunque con 'required=True', este 'else' no debería alcanzarse)
         ap.print_help()
         sys.exit(1)
 
