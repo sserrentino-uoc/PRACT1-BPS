@@ -1,3 +1,6 @@
+# Copyright (c) 2025 Serrentino Mangino, S., & Mochon Paredes, A.
+# Licensed under the MIT License. See LICENSE for details.
+
 from typing import List, Tuple, Union, Optional, Any
 from pathlib import Path
 import logging

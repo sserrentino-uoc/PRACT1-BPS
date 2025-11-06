@@ -1,3 +1,6 @@
+# Copyright (c) 2025 Serrentino Mangino, S., & Mochon Paredes, A.
+# Licensed under the MIT License. See LICENSE for details.
+
 """
 Punto de entrada principal para el proyecto de scraping del BPS.
 ... (resto de tu docstring de módulo) ...
