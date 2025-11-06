@@ -16,6 +16,7 @@ from .robots_check import check_all
 from .crawl_index import crawl_index
 from .parse_series import parse_desempleo, parse_recaudacion
 from .demo_spa import scrape_spa_dashboard
+from .auto_series import run_auto
 # --- 1. AÑADE LA IMPORTACIÓN DE VALIDATE ---
 from .validate import main as validate_main  # Renombramos 'main' a 'validate_main'
 
@@ -94,6 +95,12 @@ def main() -> None:
         help="Extrae datos del dashboard principal de la SPA (Observatorio)"
     )
     
+    # --- Comando 'auto' ---
+    p_auto = sub.add_parser(
+        "auto",
+        help="Lee dataset/indicadores_index.csv y ejecuta desempleo+recaudación con el último XLS por capítulo."
+    )
+
     # --- 2. AÑADE EL SUB-COMANDO 'validate' ---
     p_val = sub.add_parser(
         "validate",
@@ -125,6 +132,9 @@ def main() -> None:
     elif args.cmd == "spa":
         scrape_spa_dashboard()
         
+    elif args.cmd == "auto":
+        run_auto()
+
     # --- 3. AÑADE LA LLAMADA A LA FUNCIÓN DE VALIDACIÓN ---
     elif args.cmd == "validate":
         validate_main()
