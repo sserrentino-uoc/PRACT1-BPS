@@ -55,7 +55,7 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
     - python -m source.main desempleo --xls-url "https://www.bps.gub.uy/bps/file/23307/1/iii_3_subsidio-por-desempleo.xls" --sheet "III.3.5 Altas Zona" 
     - python -m source.main recaudacion --xls-url "https://www.bps.gub.uy/bps/file/23304/1/ii_recaudacion.xls" --sheet "II-0" 
 
-# 5) Demostracion de SPA
+# 5) Demostracion de SPA (captura de KPIs visibles)
 - python -m source.main spa 
 - 
 # 6) Validación rápida de los datos obtenidos por scrapping
@@ -63,7 +63,7 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
     - Si todo esta ok debe recibir el mensaje: "INFO: ✔✔✔ TODAS LAS VALIDACIONES PASARON ✔✔✔" 
 
 ## Zenodo (DOI)
-- **DOI**: `https://doi.org/10.5281/zenodo.17541918`.
+- **DOI**: Serrentino Mangino, S., & Mochon Paredes, A. (2025, noviembre 6). Datos estadísticos del Banco de Previsión Social del Uruguay. Zenodo. https://doi.org/10.5281/zenodo.17541918.
 - **Licencia del dataset**: CC BY 4.0.
 
 ## Vídeo (≤10 min)
