@@ -63,9 +63,8 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
     - Si todo esta ok debe recibir el mensaje: "INFO: ✔✔✔ TODAS LAS VALIDACIONES PASARON ✔✔✔" 
 
 ## Zenodo (DOI)
-- **Depósito**: sube los CSV de `/dataset` y el `README.md` a un **nuevo registro** de Zenodo.
-- **DOI**: copia aquí el DOI final: `10.5281/zenodo.xxxxxx` y añádelo a la **memoria** y al encabezado del vídeo.
-- **Licencia sugerida del dataset**: CC BY 4.0 u ODbL, según el origen/mezcla.
+- **DOI**: `https://doi.org/10.5281/zenodo.17541918`.
+- **Licencia del dataset**: CC BY 4.0.
 
 ## Vídeo (≤10 min)
 - Incluir una demo corta: `robots → index → (desempleo|recaudacion|asignacion) → dataset → Zenodo`.

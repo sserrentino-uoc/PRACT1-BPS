@@ -2,9 +2,10 @@ Este proyecto y sus datasets derivados se distribuyen bajo la licencia Creative 
 
 ---
 
-© 2025 [Sebastian Serrentino Mangino]
+© 2025 [Serrentino Mangino, S., & Mochon Paredes, A.]
+Datos estadísticos del Banco de Previsión Social del Uruguay. Zenodo. https://doi.org/10.5281/zenodo.17541918.
 Este dataset derivado se ofrece bajo CC-BY 4.0.
-Fuente: BPS – Indicadores de la Seguridad Social, consultado el [Fecha de Consulta 01/11/2025].
+Fuente: BPS – Indicadores de la Seguridad Social, consultado el [Fecha de Consulta 30/10/2025].
 
 ---
 
