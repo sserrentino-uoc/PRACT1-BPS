@@ -1,5 +1,4 @@
 # source/auto_series.py
-import re
 import pandas as pd
 from .parse_series import parse_desempleo, parse_recaudacion
 

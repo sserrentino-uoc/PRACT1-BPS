@@ -217,7 +217,6 @@ def _pick_best_series(obj: Any) -> pd.Series:
 
 
 # ===================== Fallbacks (xlrd, win32) =====================
-# (Estas funciones son helpers, no las anidamos)
 def _try_xlrd_manual(bytes_buf: bytes, logger, sheet=None):
     """
     (Fallback 1) Lectura manual de .xls usando xlrd directamente.
