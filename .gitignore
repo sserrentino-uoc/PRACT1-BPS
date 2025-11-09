@@ -1,1 +1,14 @@
-/.venv
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Logs y temporales
+logs/
+*.log
+200
+404
+
+# SO/Editor
+.DS_Store
+.vscode/
