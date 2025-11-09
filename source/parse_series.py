@@ -1,7 +1,7 @@
 # Copyright (c) 2025 Serrentino Mangino, S., & Mochon Paredes, A.
 # Licensed under the MIT License. See LICENSE for details.
 
-from typing import List, Tuple, Union, Optional, Any
+from typing import List, Tuple, Union, Optional, Any, Dict, Set
 from pathlib import Path
 import logging
 
@@ -11,6 +11,7 @@ import re
 import tempfile
 import requests
 import pandas as pd
+import xlrd
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
@@ -192,30 +193,101 @@ def _fix_excel_serial_dates(series: pd.Series) -> pd.Series:
     final_dates = dates_from_num.fillna(dates_from_str)
     return final_dates
 
+def _pick_best_series(obj: Any) -> pd.Series:
+    """
+    Si 'obj' es un DataFrame (p. ej., por etiquetas de columna duplicadas),
+    elige la subcolumna con más datos numéricos (menos NaN tras coerción).
+    Si es Serie, la devuelve tal cual.
+    """
+    if isinstance(obj, pd.DataFrame):
+        best_i = -1
+        best_score = -1
+        # iteramos por posición para evitar que obj[c] devuelva otro DF cuando hay duplicados
+        for i in range(obj.shape[1]):
+            s = pd.to_numeric(obj.iloc[:, i], errors="coerce")
+            score = s.notna().sum()
+            if score > best_score:
+                best_score, best_i = score, i
+        return obj.iloc[:, best_i]
+    elif isinstance(obj, pd.Series):
+        return obj
+    # último recurso: intenta convertir a Serie
+    return pd.Series(obj)
+
+
+
 # ===================== Fallbacks (xlrd, win32) =====================
 # (Estas funciones son helpers, no las anidamos)
 def _try_xlrd_manual(bytes_buf: bytes, logger, sheet=None):
     """
-    (Fallback 1) Intenta leer un .xls usando xlrd directamente.
-
-    Útil si pandas.read_excel falla. Requiere xlrd==2.0.1.
-
-    Args:
-        bytes_buf (bytes): Contenido del archivo Excel.
-        logger (logging.Logger): Logger para registrar advertencias.
-        sheet (str | int | None, optional): Nombre o índice de la hoja.
-
-    Returns:
-        pd.DataFrame | None: El DataFrame leído, o None si falla.
+    (Fallback 1) Lectura manual de .xls usando xlrd directamente.
+    Devuelve un DataFrame intentando varias filas como cabecera.
     """
+
     try:
-        import xlrd  # requiere xlrd==2.0.1
+        # Muchos .xls de BPS están en cp1252
+        book = xlrd.open_workbook(file_contents=bytes_buf,
+                                  encoding_override="cp1252",
+                                  formatting_info=False)
     except Exception as e:
-        logger.warning(f"xlrd no disponible: {type(e).__name__}: {e}")
+        logger.warning(f"xlrd.open_workbook falló: {type(e).__name__}: {e}")
         return None
-    # ... (resto de la función xlrd omitida por brevedad) ...
-    # ... (si la tienes, déjala como está) ...
-    return None # Asumimos que la tienes, si no, pega tu versión aquí
+
+    # Selección de hoja
+    try:
+        if isinstance(sheet, str):
+            sh = book.sheet_by_name(sheet)
+        else:
+            sh = book.sheet_by_index(sheet if isinstance(sheet, int) else 0)
+    except Exception as e:
+        logger.warning(f"No pude abrir la hoja solicitada: {type(e).__name__}: {e}")
+        return None
+
+    # Leer todas las celdas en memoria
+    rows = []
+    for r in range(sh.nrows):
+        row = []
+        for c in range(sh.ncols):
+            cell = sh.cell(r, c)
+            # No convertimos fechas aquí: _fix_excel_serial_dates lo hará después
+            row.append(cell.value)
+        rows.append(row)
+
+    if not rows or sh.ncols < 2:
+        return None
+
+    raw = pd.DataFrame(rows)
+
+    # Intentar promover distintas filas como cabecera
+    header_candidates = (7, 6, 5, 4, 0, 1, 2, 3)
+    last_err = None
+    for hdr in header_candidates:
+        if hdr >= len(raw):
+            continue
+        try:
+            header = raw.iloc[hdr].astype(str).str.strip().tolist()
+            data = raw.iloc[hdr+1:].reset_index(drop=True).copy()
+            data.columns = [h if h else f"col_{i}" for i, h in enumerate(header)]
+            # filtra columnas totalmente vacías
+            data = data.loc[:, data.notna().mean() > 0.0]
+            # ¿Parece tabla útil?
+            if data.dropna(how="all").shape[0] > 1 and data.shape[1] >= 2:
+                # prueba promoción “Fecha” si las columnas siguen feas
+                if _looks_unnamed_columns(data):
+                    p = _promote_row_with_fecha_as_header(data)
+                    if p is not None and p.dropna(how="all").shape[0] > 1 and p.shape[1] >= 2:
+                        logger.info(f"xlrd-manual OK con header={hdr} + promoción Fecha")
+                        p.attrs["sheet_name"] = sh.name 
+                        return p
+                logger.info(f"xlrd-manual OK con header={hdr}")
+                data.attrs["sheet_name"] = sh.name
+                return data
+        except Exception as e:
+            last_err = e
+
+    if last_err:
+        logger.warning(f"xlrd-manual sin éxito: {type(last_err).__name__}: {last_err}")
+    return None
 
 def _try_win32_excel_export(bytes_buf: bytes, logger):
     """
@@ -288,9 +360,24 @@ def _read_table_like(bytes_buf, kind, engine, logger, sheet=None, header_hint=No
             logger.warning(f"ExcelFile falló: {type(e).__name__}: {e}")
             return None
 
-        sheets = xls.sheet_names
-        use_sheet = sheet if sheet is not None else sheets[0]
-        
+        if sheet is not None:
+            sheets_to_try = [sheet]    # respeta hoja específica
+        else:
+            sheets_to_try = list(xls.sheet_names)  # probar todas
+
+            # PRIORIDAD: ALTAS > EMISIÓN > PROMEDIO > resto
+            def _sheet_score(name: str) -> int:
+                low = str(name).lower()
+                if "altas" in low:
+                    return 0
+                if "emisión" in low or "emision" in low:
+                    return 1
+                if "promedio" in low:
+                    return 2
+                return 3
+
+            sheets_to_try = sorted(sheets_to_try, key=_sheet_score)
+
         if header_hint_internal is not None:
              headers_to_try = (header_hint_internal, 6, 7, 5, 4, 0, 1, 2, 3)
         else:
@@ -304,38 +391,116 @@ def _read_table_like(bytes_buf, kind, engine, logger, sheet=None, header_hint=No
                 seen.add(hdr)
 
         last_err = None
-        
-        for hdr in headers_a_probar_final:
-            try:
-                bio.seek(0)
-                df = pd.read_excel(bio, sheet_name=use_sheet, engine=engine, header=hdr)
-                
-                # Comprobación de que el DataFrame es útil Y NO ES BASURA
-                if (
-                    df.shape[1] >= 2 
-                    and df.dropna(how="all").shape[0] > 1
-                    and not _looks_unnamed_columns(df)  # <-- La corrección clave
-                ):
-                    logger.info(f"Excel OK: hoja={use_sheet} header={hdr} cols={list(df.columns)[:6]}")
-                    return df
-            except Exception as e:
-                last_err = e
-        
+        best_df = None
+        best_df_sheet = None
+        best_score = (-1, -1)   # (n_cols, n_rows_utiles)
+        for use_sheet in sheets_to_try:
+            for hdr in headers_a_probar_final:
+                try:
+                    bio.seek(0)
+                    df = pd.read_excel(bio, sheet_name=use_sheet, engine=engine, header=hdr)
+
+                    # Limpieza mínima
+                    df = df.loc[:, df.notna().mean() > 0.0]  # quita columnas totalmente vacías
+
+                    # Si la cabecera quedó fea, intenta promover una fila con "Fecha"
+                    if _looks_unnamed_columns(df):
+                        p = _promote_row_with_fecha_as_header(df)
+                        if p is not None:
+                            df = p
+
+                    rows_ok = df.dropna(how="all").shape[0]
+                    cols_ok = df.shape[1]
+
+                    # Criterio de “tabla útil”
+                    if cols_ok >= 2 and rows_ok > 1:
+                        logger.info(f"Excel OK: hoja={use_sheet} header={hdr} cols={list(df.columns)[:6]}")
+                        df.attrs["sheet_name"] = str(use_sheet)
+                        return df
+
+                    # Guarda el mejor candidato por si ninguna pasa el umbral fuerte
+                    score = (cols_ok, rows_ok)
+                    if score > best_score:
+                        best_score, best_df = score, df
+                        best_df_sheet = use_sheet
+
+                except Exception as e:
+                    last_err = e
+                    continue
+
+        # Devolver el mejor si supera un umbral mínimo
+        if best_df is not None and best_score[0] >= 2 and best_score[1] > 0:
+            if best_df_sheet is not None:
+                best_df.attrs["sheet_name"] = str(best_df_sheet)
+            logger.info(f"Excel débilmente válido (mejor hallado): score={best_score}")
+            return best_df
+
         if last_err:
-            logger.warning(f"Excel falló: {type(last_err).__name__ if hasattr(last_err,'__class__') else 'Error'}: {last_err}")
-        
-        return None
+            logger.warning(f"Excel falló: {type(last_err).__name__}: {last_err}")
+       
+        return None 
+
         
     def _try_read_html():
-        """(Placeholder) Intenta leer el buffer como HTML con pd.read_html."""
-        return None
+        """Intenta leer como HTML usando pandas.read_html (elige la tabla más ancha)."""
+        bio.seek(0)
+        try:
+            tables = pd.read_html(bio, flavor="bs4")
+        except Exception as e:
+            logger.warning(f"read_html falló: {type(e).__name__}: {e}")
+            return None
+        if not tables:
+            return None
+        # Elige la tabla con más columnas
+        df = max(tables, key=lambda t: t.shape[1])
+        # Promueve cabecera si quedó 'Unnamed:'
+        if _looks_unnamed_columns(df):
+            p = _promote_row_with_fecha_as_header(df)
+            if p is not None:
+                df = p
+        if df.dropna(how="all").shape[0] <= 1 or df.shape[1] < 2:
+            return None
+        return df
 
     def _try_bs4_table(bytes_buf_local, logger_local):
-        """(Placeholder) Intenta extraer la tabla más grande usando BeautifulSoup."""
-        return None
+        """Extrae manualmente la tabla más grande con BeautifulSoup."""
+        try:
+            soup = BeautifulSoup(bytes_buf_local, "lxml")
+        except Exception:
+            soup = BeautifulSoup(bytes_buf_local, "html.parser")
+        tables = soup.find_all("table")
+        if not tables:
+            return None
+        # Elige la tabla con más filas
+        table = max(tables, key=lambda t: len(t.find_all("tr")))
+        rows = []
+        for tr in table.find_all("tr"):
+            cells = [td.get_text(strip=True) for td in tr.find_all(["th", "td"])]
+            if any(cells):
+                rows.append(cells)
+        if not rows:
+            return None
+        header = rows[0]
+        data = rows[1:]
+        df = pd.DataFrame(data, columns=[c if c else f"col_{i}" for i, c in enumerate(header)])
+        if _looks_unnamed_columns(df):
+            p = _promote_row_with_fecha_as_header(df)
+            if p is not None:
+                df = p
+        if df.dropna(how="all").shape[0] <= 1 or df.shape[1] < 2:
+            return None
+        return df
 
     def _try_read_csv():
-        """(Placeholder) Intenta leer el buffer como CSV/TSV."""
+        """Prueba como CSV/TSV con separadores comunes."""
+        for sep in (";", ",", "\t"):
+            bio.seek(0)
+            try:
+                df = pd.read_csv(bio, sep=sep, engine="python")
+                if df.dropna(how="all").shape[0] > 1 and df.shape[1] >= 2:
+                    return df
+            except Exception:
+                pass
         return None
 
     # --- Ruta principal de _read_table_like ---
@@ -372,18 +537,65 @@ def _read_table_like(bytes_buf, kind, engine, logger, sheet=None, header_hint=No
         if df is not None:
             return df
 
+        try:
+            tmp = Path(tempfile.gettempdir()) / "parse_fail_dump.bin"
+            tmp.write_bytes(bytes_buf)
+            logger.warning(f"Dump binario guardado en {tmp} para depuración")
+        except Exception:
+            pass
+
         raise RuntimeError("No pude leer el contenido ni como Excel ni como HTML/CSV")
 
     if kind == "html":
-        # (Pega tu lógica para kind=="html" aquí)
-        pass
+        df = _try_read_html()
+        if df is not None:
+            return df
+        df = _try_bs4_table(bytes_buf, logger)
+        if df is not None:
+            return df
+        # último intento: ¿la página es CSV embebido?
+        df = _try_read_csv()
+        if df is not None:
+            return df
+        
+        # Dump opcional aquí
+        try:
+            tmp = Path(tempfile.gettempdir()) / "parse_fail_dump_html.bin"
+            tmp.write_bytes(bytes_buf)
+            logger.warning(f"Dump HTML guardado en {tmp} para depuración")
+        except Exception:
+            pass
+
+        raise RuntimeError("HTML no legible como tabla")
 
     if kind == "text":
-        # (Pega tu lógica para kind=="text" aquí)
-        pass
+        df = _try_read_csv()
+        if df is not None:
+            return df
+        
+        try:
+            tmp = Path(tempfile.gettempdir()) / "parse_fail_dump_text.bin"
+            tmp.write_bytes(bytes_buf)
+            logger.warning(f"Dump texto guardado en {tmp} para depuración")
+        except Exception:
+            pass
 
-    # (Pega tu lógica de fallback final aquí)
-    # ...
+        raise RuntimeError("Texto plano sin formato tabular")
+
+
+    # Fallback cuando 'kind' es None o 'unknown': intentar HTML/CSV igual
+    if kind in (None, "unknown"):
+        logger.info("Formato 'unknown': pruebo HTML y CSV por si acaso…")
+        df = _try_read_html()
+        if df is not None:
+            return df
+        df = _try_bs4_table(bytes_buf, logger)
+        if df is not None:
+            return df
+        df = _try_read_csv()
+        if df is not None:
+            return df
+
 
     raise ValueError("Formato desconocido o no soportado")
 
@@ -437,13 +649,13 @@ def parse_desempleo(
         df = df.rename(columns={c: str(c).strip() for c in df.columns})
         cols_low = {str(c).lower(): c for c in df.columns}
 
-        # --- Promover cabecera si es necesario ---
         if _looks_unnamed_columns(df):
             df2 = _promote_row_with_fecha_as_header(df)
             if df2 is not None:
                 df = df2
                 df = df.rename(columns={c: str(c).strip() for c in df.columns})
                 cols_low = {str(c).lower(): c for c in df.columns}
+
 
         # --- Encontrar columna de fecha ---
         fecha_col = (
@@ -470,24 +682,50 @@ def parse_desempleo(
                     return col_name
             return None
 
-        sheet_hint = (str(sheet).lower() if isinstance(sheet, str) else "")
+        sheet_name = str(getattr(df, "attrs", {}).get("sheet_name", "")).lower()
+        sheet_hint = (str(sheet).lower() if isinstance(sheet, str) else sheet_name)
+
         is_altas = "altas" in sheet_hint
         is_emision = ("emisión" in sheet_hint) or ("emision" in sheet_hint)
         is_promedio = "promedio" in sheet_hint
         
+        if not (is_altas or is_emision or is_promedio):
+            low_cols = [str(c).lower() for c in df.columns]
+            if ("montevideo" in low_cols) and ("interior" in low_cols):
+                is_altas = True
+
         out = pd.DataFrame()
-        out["fecha"] = _fix_excel_serial_dates(df[fecha_col])
         
+        # Detecta columnas de zona
+        monte_col = next((cols_low[c] for c in cols_low if re.search(r"\bmontevideo\b", c)), None)
+        inter_col = next((cols_low[c] for c in cols_low if re.search(r"\binterior\b", c)), None)
+        has_zona = bool(monte_col and inter_col)
+
+        if has_zona:
+            out["altas_montevideo"] = _to_num(df[monte_col])
+            out["altas_interior"]   = _to_num(df[inter_col])
+
+        # Manejar duplicados de 'Fecha' → df[fecha_col] puede ser DataFrame
+        _fecha_obj = df[fecha_col]
+        if isinstance(_fecha_obj, pd.DataFrame):
+            # Elige por POSICIÓN la subcol con menos NaN (evita etiquetas duplicadas)
+            na_ratio = _fecha_obj.notna().mean()
+            cand_pos = int(na_ratio.to_numpy().argmax())
+            _fecha_obj = _fecha_obj.iloc[:, cand_pos]
+        # Manejar duplicados de 'Fecha'
+        out["fecha"] = _fix_excel_serial_dates(_pick_best_series(df[fecha_col]))
+
+            
         # Lógica específica de 'total_col' para desempleo
         total_col = next((cols_low[c] for c in cols_low if c.strip().lower() == "total"), None)
         if total_col:
-            if is_altas:
+            if ("altas" not in out.columns) and (("altas" in sheet_hint) or has_zona):
                 out["altas"] = _to_num(df[total_col])
             elif is_emision:
                 out["beneficiarios"] = _to_num(df[total_col])
             elif is_promedio:
                 out["importe_promedio_total"] = _to_num(df[total_col])
-        
+
         cand_map: Dict[str, List[str]] = {}
         if is_altas:
             cand_map.update({
@@ -524,14 +762,16 @@ def parse_desempleo(
                 continue
             src = find_col(pats)
             if src is not None:
-                out[newcol] = _to_num(df[src])
-        
+                out[newcol] = _to_num(_pick_best_series(df[src]))  
+        if "altas" not in out.columns:
+            if "altas_montevideo" in out.columns and "altas_interior" in out.columns:
+                out["altas"] = out["altas_montevideo"].fillna(0) + out["altas_interior"].fillna(0)
         out = _norm_mes(out, "fecha")
 
         # --- Validación ---
         metric_cols = {
             "beneficiarios", "altas", "bajas", "monto_total",
-            "importe_promedio_total", "altas_montevideo", "altas_despido"
+            "importe_promedio_total", "altas_montevideo", "altas_interior", "altas_despido"
         }
         if metric_cols.isdisjoint(out.columns):
             logger.warning(f"Columnas detectadas: {list(out.columns)}")
@@ -588,9 +828,13 @@ def parse_recaudacion(
         df = df.rename(columns={c: str(c).strip() for c in df.columns})
         cols_low = {str(c).lower(): c for c in df.columns}
 
-        # --- Promover cabecera (Lógica idéntica) ---
-        # (Se omite la promoción de cabecera que sí estaba en desempleo,
-        #  se mantiene la lógica original que tenías)
+        # Promover cabecera si la mayoría son 'Unnamed:' (igual que en desempleo)
+        if _looks_unnamed_columns(df):
+            df2 = _promote_row_with_fecha_as_header(df)
+            if df2 is not None:
+                df = df2
+                df = df.rename(columns={c: str(c).strip() for c in df.columns})
+                cols_low = {str(c).lower(): c for c in df.columns}
 
         # --- Encontrar columna de fecha ---
         fecha_col = (
@@ -610,7 +854,8 @@ def parse_recaudacion(
             raise ValueError("No encuentro columna de fecha/mes en 'recaudación'")
 
         out = pd.DataFrame()
-        out["fecha"] = _fix_excel_serial_dates(df[fecha_col])
+        _fecha_obj = _pick_best_series(df[fecha_col])
+        out["fecha"] = _fix_excel_serial_dates(_fecha_obj)
 
         # --- Mapeo de columnas ---
         def find_col(patterns: List[str]) -> Optional[str]:
@@ -623,13 +868,13 @@ def parse_recaudacion(
         cand_map: Dict[str, List[str]] = {
             "recaudacion_privados": [r"\bprivados\b"],
             "recaudacion_publicos": [r"\bp(ú|u)blicos\b"],
-            "recaudacion_total": [r"\btotal\b"],
+            "recaudacion_total": [r"\btotal\b", r"\btotal\s+pa[ií]s\b"],  # Total País con/ sin acento
         }
 
         for newcol, pats in cand_map.items():
             src = find_col(pats)
             if src is not None:
-                out[newcol] = _to_num(df[src])
+                        out[newcol] = _to_num(_pick_best_series(df[src]))
             else:
                 logger.warning(f"No se encontró la columna '{newcol}' (patrones: {pats})")
 

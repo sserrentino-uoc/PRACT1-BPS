@@ -678,6 +678,7 @@ def crawl_index(pages=None, out_csv=f"{OUT_DIR}/indicadores_index.csv",
 
     with requests.Session() as s:
         s.headers.update({"User-Agent": DEFAULT_UA})
+        logger.info(f"User-Agent en uso: {DEFAULT_UA}")  # ← evidencia en logs
 
         # ==== 1) CRAWL PÁGINAS ====
         for page_url in pages:

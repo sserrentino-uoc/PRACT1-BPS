@@ -11,7 +11,7 @@ import argparse
 import sys
 
 # 3. Importaciones locales (de tu proyecto)
-from .settings import BASE_INDEX_PAGES, DEFAULT_DELAY_SEC
+from .settings import BASE_INDEX_PAGES, DEFAULT_DELAY_SEC, DEFAULT_UA
 from .robots_check import check_all
 from .crawl_index import crawl_index
 from .parse_series import parse_desempleo, parse_recaudacion
