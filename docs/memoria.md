@@ -90,11 +90,6 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
 Propietario: BPS (Uruguay).  
 Actuamos con “scraping responsable”: chequeo de `robots.txt` (ver `/logs/robots.log`), `User-Agent` propio, **rate-limit** (delays), **timeouts**, **reintentos**, y evitamos zonas autenticadas o con captchas. No capturamos datos personales. Uso académico/no comercial. Si `robots.txt` no está disponible (HTTP 404), aplicamos políticas “polite crawling” y monitoreamos carga.
 
-> **TODO Referencias/precedentes del BPS u otros análisis**  
-> - Referencia 1: `Título (enlace)`  
-> - Referencia 2: `Título (enlace)`  
-> - Nota: justificar relación y diferencias con nuestro dataset.
-
 ## 8. Inspiración
 Trabajos previos del BPS y tableros del Observatorio; el dataset busca facilitar análisis reproducibles (PRACT2) sin depender de la navegación manual por múltiples páginas.
 
