@@ -117,12 +117,12 @@ Su principal contribución es el **flujo automatizado y documentado de recolecci
 - El proyecto no incluye análisis de contenido, sino preparación y documentación de datos (según el alcance de la PRACT1).
 
 
-## 9. Licencia del dataset
-Publicamos el dataset en Zenodo bajo CC0 1.0 (dominio público) para maximizar su reutilización académica y compatibilidad con PRACT2. Se trata de datos públicos y agregados, sin datos personales. Cita sugerida (Zenodo): Serrentino Mangino, S., & Mochón Paredes, A. (2025). Observatorio BPS – Indicadores index + Series (desempleo/recaudación) (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.17541918
-
-> **TODO Licencia del código**  
-> Repositorio bajo `MIT` (confirmar en `LICENSE`).  
-> Nota: indicar compatibilidad entre licencia del **código** y licencia del **dataset**.
+## 9. Licencias
+El dataset se publica en Zenodo (v1.0.0) con DOI 10.5281/zenodo.17541918 bajo licencia CC0 1.0 Universal, a fin de maximizar su reutilización académica y garantizar compatibilidad con PRACT2.
+Dado que se trata de datos públicos y agregados provenientes de un organismo oficial (BPS) y sin información personal, la licencia CC0 elimina fricciones de uso y citación.
+La cita sugerida se encuentra en la propia ficha de Zenodo junto al DOI.
+Una copia local del dataset se conserva en /dataset.
+En el README se detalla la política de licencias: Datos → CC0 1.0 / Código → MIT.
 
 ## 10. Código y retos técnicos
 Código en `/source` con CLI (`python -m source.main <subcomando>`).  
