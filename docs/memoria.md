@@ -64,15 +64,19 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
 
 **Figuras**
 1.  Indices - URLs
+   
     ![Indices](/docs/imagenes/indices_url.png)
 
-2.  Subsidio por desempleo – Altas (total)
+3.  Subsidio por desempleo – Altas (total)
+   
     ![Indices](/docs/imagenes/altas_subsidio_desempleo.png)
 
-3.  Recaudacion de la Seguridad Social - Privados/Públicos/Total (Total)
+5.  Recaudacion de la Seguridad Social - Privados/Públicos/Total (Total)
+   
     ![Recaudacion](/docs/imagenes/recaudacion.png)
 
-4.  Indicadores BPS – BPS en Cifras
+7.  Indicadores BPS – BPS en Cifras
+   
     ![Recaudación](/docs/imagenes/indicadores_bps_en_cifras.png)
     
 ## 7. Propietario y aspectos éticos/legales
