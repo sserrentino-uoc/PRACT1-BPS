@@ -163,6 +163,6 @@ Serrentino Mangino, S., & Mochon Paredes, A. (2025, noviembre 6). Datos estadís
 | 3. Desarrollo del código | `TODO` | `TODO` |  |
 | 4. Participación en el vídeo | `TODO` | `TODO` |  |
 
-> **Firmas**:  
-> - Sebastian Serrentino Mangino 
-> - Alberto Mochón Paredes
+**Firmas**:  
+- Sebastian Serrentino Mangino (S.S.M.)
+- Alberto Mochón Paredes (A.M.P.)
