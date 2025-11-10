@@ -161,7 +161,7 @@ Serrentino Mangino, S., & Mochon Paredes, A. (2025, noviembre 6). Datos estadís
 | 1. Investigación previa | `TODO` | `TODO` |  |
 | 2. Redacción de las respuestas | `TODO` | `TODO` |  |
 | 3. Desarrollo del código | `TODO` | `TODO` |  |
-| 4. Representación gráfica | `TODO` | `TODO` |  |
+| 4. Participación en el vídeo | `TODO` | `TODO` |  |
 
 > **Firmas**:  
 > - Sebastian Serrentino Mangino 
