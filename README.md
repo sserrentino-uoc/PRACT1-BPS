@@ -48,6 +48,18 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
+### Windows
+```bash
+# crear entorno virtual
+py -m venv .venv
+
+# activar
+.\.venv\Scripts\Activate.ps1
+
+# actualizar pip e instalar dependencias
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
 
 # 1.1) Navegador Chrome y Driver
 
