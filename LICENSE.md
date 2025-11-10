@@ -23,7 +23,7 @@ Serrentino Mangino, S., & Mochón Paredes, A. (2025). *Observatorio BPS – Indi
 Banco de Previsión Social (Uruguay) – “Indicadores de la Seguridad Social”.  
 Consultado el **30/10/2025**. El BPS no patrocina ni avala este repositorio; cualquier error de procesamiento es responsabilidad de los autores.
 
-**Enlaces legales CC0**  
+**Enlaces legales CC 1.0**  
 - Resumen legible: https://creativecommons.org/publicdomain/zero/1.0/  
 - Texto legal: https://creativecommons.org/publicdomain/zero/1.0/legalcode
 
