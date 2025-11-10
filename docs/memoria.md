@@ -14,7 +14,7 @@
 El Banco de Previsión Social (BPS) de Uruguay publica indicadores y series relacionadas con la seguridad social. Este proyecto extrae un índice de indicadores y dos series clave (subsidio por desempleo y recaudación), generando un dataset reproducible para análisis posteriores (PRACT2). Se describe la fuente, su fiabilidad institucional y la motivación: disponer de datos limpios y versionados.
 
 ## 2. Título del dataset
-“Observatorio BPS – Altas de Subsidios por desempleo, Recaudación (mensual) y Datos Generales”
+“Observatorio BPS – Indicadores y Series (Desempleo, Recaudación)”
 
 ## 3. Descripción del dataset
 Dataset CSVs con:  
