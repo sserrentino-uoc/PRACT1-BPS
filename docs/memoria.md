@@ -29,7 +29,7 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
 > - `indicadores_index.csv`: **Corte** = fecha de rastreo `YYYY-MM-DD`.
 
 ## 4. Representación gráfica (pipeline)
-![Pipeline de scraping](docs/diagrama de flujo.png)
+![Pipeline de scraping](docs/diagrama_de_flujo.png)
 
 **Flujo**: Descubrimiento/índice (HTML) → Descarga tablas (HTML/XLS/XLSX) → Limpieza/normalización → CSVs finales → Publicación Zenodo.
 
