@@ -86,12 +86,36 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
 - SPA: demo_spa.py (Selenium + WebDriverWait) captura 21 azulejos del dashboard; salida tabular en dataset/spa_dashboard_data.csv (≈13×2) y trazas en logs/spa_scrape.log.
 - Validación: validate.py chequea existencia, encabezados y nulos básicos; evidencias en logs/validate.log (si lo ejecutaste) y verificación manual de CSVs.
 
-## 8. Inspiración
-Trabajos previos del BPS y tableros del Observatorio; el dataset busca facilitar análisis reproducibles (PRACT2) sin depender de la navegación manual por múltiples páginas.
+# 8. Inspiración
 
-> **TODO Comparativa breve con los trabajos citados en (6)**  
-> - Qué aporta nuestro flujo (automatización, reproducibilidad, CSV abiertos).  
-> - Qué limita (solo dos series por ahora, dependencia de layout institucional).
+El proyecto se inspira en los **tableros públicos del Observatorio del BPS**, especialmente en los apartados *“Indicadores de la Seguridad Social”* y *“Series históricas”*, donde se presentan métricas agregadas sobre empleo, recaudación y prestaciones.  
+Estos tableros constituyen una valiosa fuente de información, pero **su consulta es manual** y la descarga de datos requiere navegar por múltiples páginas o archivos Excel heterogéneos.  
+
+**Trabajos previos del BPS** —como los informes *“Indicadores de la Seguridad Social”* y los tableros *Power BI* del Observatorio— ofrecen visualizaciones interactivas, pero **no publican datasets normalizados ni reproducibles**. Tampoco incluyen metadatos técnicos, licencias explícitas ni versiones históricas de los indicadores.  
+
+El **dataset generado en PRACT1-BPS** aporta una capa intermedia que **facilita el análisis reproducible** y la integración automatizada para futuras prácticas (por ejemplo, **PRACT2**, dedicada a análisis estadístico o visualización).  
+Su principal contribución es el **flujo automatizado y documentado de recolección** (Python + Selenium + BeautifulSoup + validaciones), que transforma información semiestructurada en **CSV abiertos y estandarizados**, acompañados de **logs y DOI** para trazabilidad.  
+
+**Comparativa breve con los trabajos previos:**
+
+| Aspecto | Tableros del Observatorio BPS | PRACT1-BPS |
+|----------|-------------------------------|-------------|
+| **Acceso** | Navegación manual, interfaz web | Automatizado (scripts Python) |
+| **Formato de datos** | Visualizaciones o Excel heterogéneos | CSV homogéneos y reproducibles |
+| **Licencia** | No especificada | CC0 1.0 Universal |
+| **Reproducibilidad** | Limitada | Completa (scripts, logs, DOI) |
+| **Trazabilidad** | Parcial (sin versiones históricas) | Total (logs + versionado Zenodo) |
+
+**Aportes clave:**
+- Automatización completa del flujo de recolección y normalización.  
+- Publicación con metadatos, licencias y DOI (cumplimiento FAIR).  
+- Disponibilidad de archivos CSV abiertos, listos para análisis reproducibles en PRACT2.  
+
+**Limitaciones actuales:**
+- Cobertura inicial acotada a **dos series históricas (desempleo y recaudación)**.  
+- Dependencia del **layout actual del sitio institucional**: un rediseño podría requerir ajustes en los selectores de scraping.  
+- El proyecto no incluye análisis de contenido, sino preparación y documentación de datos (según el alcance de la PRACT1).
+
 
 ## 9. Licencia del dataset
 Publicamos el dataset en Zenodo bajo CC0 1.0 (dominio público) para maximizar su reutilización académica y compatibilidad con PRACT2. Se trata de datos públicos y agregados, sin datos personales. Cita sugerida (Zenodo): Serrentino Mangino, S., & Mochón Paredes, A. (2025). Observatorio BPS – Indicadores index + Series (desempleo/recaudación) (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.17541918
