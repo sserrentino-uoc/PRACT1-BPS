@@ -63,16 +63,18 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
 ## 6. Resultados principales
 
 **Figuras**
+1.  Indices - URLs
+    ![Indices](/docs/imagenes/indices_url.png)
 
-1. Indices - URLs
-   ![Indices](/docs/imagenes/indices_url.png)
-3. Subsidio por desempleo – Altas (total)  
-   ![Indices](/docs/imagenes/altas_subsidio_desempleo.png)
-4. Recaudacion de la Seguridad Social - Privados/Públicos/Total (Total)  
-   ![Recaudacion](/docs/imagenes/recaudacion.png)
-5. Indicacdores BPS –  BPS en Cifras
-   ![Recaudación](/docs/imagenes/indicadores_bps_en_cifras.png)
+2.  Subsidio por desempleo – Altas (total)
+    ![Indices](/docs/imagenes/altas_subsidio_desempleo.png)
 
+3.  Recaudacion de la Seguridad Social - Privados/Públicos/Total (Total)
+    ![Recaudacion](/docs/imagenes/recaudacion.png)
+
+4.  Indicadores BPS – BPS en Cifras
+    ![Recaudación](/docs/imagenes/indicadores_bps_en_cifras.png)
+    
 ## 7. Propietario y aspectos éticos/legales
 Propietario: BPS (Uruguay).  
 Actuamos con “scraping responsable”: chequeo de `robots.txt` (ver `/logs/robots.log`), `User-Agent` propio, **rate-limit** (delays), **timeouts**, **reintentos**, y evitamos zonas autenticadas o con captchas. No capturamos datos personales. Uso académico/no comercial. Si `robots.txt` no está disponible (HTTP 404), aplicamos políticas “polite crawling” y monitoreamos carga.
