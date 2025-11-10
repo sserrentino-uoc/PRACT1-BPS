@@ -8,7 +8,7 @@
 
 > **Portada / Metadatos**  
 > Asignatura/Grupo: `Tipología y ciclo de vida de los datos`· Fecha: `1/11/2025`  
-> Enlace al vídeo (Drive UOC): `ENLACE` (sustituir el placeholder de arriba cuando esté)
+> Enlace al vídeo (Drive UOC): https://drive.google.com/drive/folders/1WeBU1GibaRapkJ_BqI4K9bRUuO8Dic5F
 
 ## 1. Contexto
 El Banco de Previsión Social (BPS) de Uruguay publica indicadores y series relacionadas con la seguridad social. Este proyecto extrae un índice de indicadores y dos series clave (subsidio por desempleo y recaudación), generando un dataset reproducible para análisis posteriores (PRACT2). Se describe la fuente, su fiabilidad institucional y la motivación: disponer de datos limpios y versionados.
