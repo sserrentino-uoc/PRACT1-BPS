@@ -32,9 +32,22 @@
 
 ## Uso rápido
 
-# 1) Entorno
-python -m venv .venv && . .venv/bin/activate   # Windows: .venv\Scripts\activate
+## 1) Entorno (Linux/macOS y Windows)
+
+> Requisito: Python 3.x instalado. Se recomienda 3.10+.
+
+### Linux / macOS (bash/zsh)
+```bash
+# crear entorno virtual
+python3 -m venv .venv
+
+# activar
+source .venv/bin/activate
+
+# actualizar pip e instalar dependencias
+python -m pip install --upgrade pip
 pip install -r requirements.txt
+```
 
 # 1.1) Navegador Chrome y Driver
 
