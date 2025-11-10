@@ -63,19 +63,19 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
 ## 6. Resultados principales
 
 **Figuras**
-1.  Indices - URLs
+Indices - URLs
    
     ![Indices](/docs/imagenes/indices_url.png)
 
-3.  Subsidio por desempleo – Altas (total)
+Subsidio por desempleo – Altas (total)
    
     ![Indices](/docs/imagenes/altas_subsidio_desempleo.png)
 
-5.  Recaudacion de la Seguridad Social - Privados/Públicos/Total (Total)
+Recaudacion de la Seguridad Social - Privados/Públicos/Total (Total)
    
     ![Recaudacion](/docs/imagenes/recaudacion.png)
 
-7.  Indicadores BPS – BPS en Cifras
+Indicadores BPS – BPS en Cifras
    
     ![Recaudación](/docs/imagenes/indicadores_bps_en_cifras.png)
     
@@ -86,7 +86,7 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
 - SPA: demo_spa.py (Selenium + WebDriverWait) captura 21 azulejos del dashboard; salida tabular en dataset/spa_dashboard_data.csv (≈13×2) y trazas en logs/spa_scrape.log.
 - Validación: validate.py chequea existencia, encabezados y nulos básicos; evidencias en logs/validate.log (si lo ejecutaste) y verificación manual de CSVs.
 
-# 8. Inspiración
+# 7. Inspiración
 
 El proyecto se inspira en los **tableros públicos del Observatorio del BPS**, especialmente en los apartados *“Indicadores de la Seguridad Social”* y *“Series históricas”*, donde se presentan métricas agregadas sobre empleo, recaudación y prestaciones.  
 Estos tableros constituyen una valiosa fuente de información, pero **su consulta es manual** y la descarga de datos requiere navegar por múltiples páginas o archivos Excel heterogéneos.  
@@ -117,14 +117,14 @@ Su principal contribución es el **flujo automatizado y documentado de recolecci
 - El proyecto no incluye análisis de contenido, sino preparación y documentación de datos (según el alcance de la PRACT1).
 
 
-## 9. Licencias
+## 8. Licencias
 El dataset se publica en Zenodo (v1.0.0) con DOI 10.5281/zenodo.17541918 bajo licencia CC0 1.0 Universal, a fin de maximizar su reutilización académica y garantizar compatibilidad con PRACT2.
 Dado que se trata de datos públicos y agregados provenientes de un organismo oficial (BPS) y sin información personal, la licencia CC0 elimina fricciones de uso y citación.
 La cita sugerida se encuentra en la propia ficha de Zenodo junto al DOI.
 Una copia local del dataset se conserva en /dataset.
 En el [README](/README.md) se detalla la política de licencias: Datos → CC0 1.0 / Código → MIT.
 
-## 10. Código y retos técnicos
+## 9. Código y retos técnicos
 Código en `/source` con CLI (`python -m source.main <subcomando>`).  
 Retos: páginas institucionales heterogéneas (HTML/XLS/XLSX), normalización de formatos, distinguir recursos (sniffing de binario/HTML), y una SPA que requiere Selenium (archivo `demo_spa.py` con waits). Se registran logs en `/logs`.
 
@@ -137,11 +137,11 @@ Solución: funciones _norm_num() y _norm_mes() en parse_series.py para armonizar
 Falta de robots.txt formal (404): riesgo de ambigüedad de permisos.
 Solución: polite crawling explícito (UA propio, DEFAULT_DELAY_SEC, MAX_RETRIES, REQUEST_TIMEOUT en settings.py) + registro exhaustivo en robots.log y documentación en memoria.
 
-## 11. Dataset y DOI
+## 10. Dataset y DOI
 CSVs disponibles en `/dataset`.
 Serrentino Mangino, S., & Mochon Paredes, A. (2025, noviembre 6). Datos estadísticos del Banco de Previsión Social del Uruguay. Zenodo. https://doi.org/10.5281/zenodo.17541918
 
-## 12. Evidencias y reproducibilidad
+## 11. Evidencias y reproducibilidad
 - **Logs** de scraping: `/logs/*.log` (robots, índice, series, SPA).  
 - **Parámetros**: `/source/settings.py` (User-Agent, delays, timeouts).  
 - **Requisitos**: `requirements.txt`.  
@@ -154,22 +154,14 @@ Serrentino Mangino, S., & Mochon Paredes, A. (2025, noviembre 6). Datos estadís
 
 ---
 
-## 13. Tabla de contribuciones (obligatoria)
+## 12. Tabla de contribuciones (obligatoria)
 
 | Apartado | S.S.M. | A.M.P. | Notas |
 |---|---:|---:|---|
-| 1. Contexto | `TODO` | `TODO` |  |
-| 2. Título dataset | `TODO` | `TODO` |  |
-| 3. Descripción | `TODO` | `TODO` |  |
+| 1. Investigación previa | `TODO` | `TODO` |  |
+| 2. Redacción de las respuestas | `TODO` | `TODO` |  |
+| 3. Desarrollo del código | `TODO` | `TODO` |  |
 | 4. Representación gráfica | `TODO` | `TODO` |  |
-| 5. Contenido | `TODO` | `TODO` |  |
-| 6. Ética/legal | `TODO` | `TODO` |  |
-| 7. Inspiración/Comparativa | `TODO` | `TODO` |  |
-| 8. Licencia | `TODO` | `TODO` |  |
-| 9. Código/Retos | `TODO` | `TODO` |  |
-| 10. Dataset/DOI | `TODO` | `TODO` |  |
-| 11. Evidencias/Repro | `TODO` | `TODO` |  |
-| Vídeo | `TODO` | `TODO` |  |
 
 > **Firmas**:  
 > - Sebastian Serrentino Mangino 
