@@ -122,7 +122,7 @@ El dataset se publica en Zenodo (v1.0.0) con DOI 10.5281/zenodo.17541918 bajo li
 Dado que se trata de datos públicos y agregados provenientes de un organismo oficial (BPS) y sin información personal, la licencia CC0 elimina fricciones de uso y citación.
 La cita sugerida se encuentra en la propia ficha de Zenodo junto al DOI.
 Una copia local del dataset se conserva en /dataset.
-En el README se detalla la política de licencias: Datos → CC0 1.0 / Código → MIT.
+En el [README](README.md) se detalla la política de licencias: Datos → CC0 1.0 / Código → MIT.
 
 ## 10. Código y retos técnicos
 Código en `/source` con CLI (`python -m source.main <subcomando>`).  
