@@ -79,6 +79,13 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
    
     ![Recaudación](/docs/imagenes/indicadores_bps_en_cifras.png)
     
+**Resultados**
+- Ética / robots.txt: robots_check.py registra 404 para robots en dominios consultados → se aplica polite crawling (UA propio, espera ≈2s, reintentos). Evidencia: logs/robots.log.
+- Crawl índice: crawl_index.py → dataset/indicadores_index.csv (~272×8 en el ZIP) + trazas en logs/crawl_index.log.
+- Series: parse_series.py → dataset/series_desempleo.csv y dataset/series_recaudacion.csv (≈24×4), con _norm_num() y _norm_mes() para homogeneizar números y tiempo. Evidencia adicional: logs/parse_series.log (si presente).
+- SPA: demo_spa.py (Selenium + WebDriverWait) captura 21 azulejos del dashboard; salida tabular en dataset/spa_dashboard_data.csv (≈13×2) y trazas en logs/spa_scrape.log.
+- Validación: validate.py chequea existencia, encabezados y nulos básicos; evidencias en logs/validate.log (si lo ejecutaste) y verificación manual de CSVs.
+
 ## 7. Propietario y aspectos éticos/legales
 Propietario: BPS (Uruguay).  
 Actuamos con “scraping responsable”: chequeo de `robots.txt` (ver `/logs/robots.log`), `User-Agent` propio, **rate-limit** (delays), **timeouts**, **reintentos**, y evitamos zonas autenticadas o con captchas. No capturamos datos personales. Uso académico/no comercial. Si `robots.txt` no está disponible (HTTP 404), aplicamos políticas “polite crawling” y monitoreamos carga.
