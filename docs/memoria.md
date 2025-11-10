@@ -152,24 +152,20 @@ Esta sección documenta **cómo reproducir** la extracción y **qué evidencias*
 ## 11.1 Artefactos y evidencias
 
 - **Logs de scraping**: `logs/*.log`  
-  Incluyen *robots, índice, series, SPA* con timestamps, niveles (`INFO/WARN/ERROR`), `User-Agent` efectivo, latencias y *backoff*.
-- **Parámetros de ejecución**: `source/settings.py`  
-  (p. ej., `USER_AGENT`, `REQUEST_DELAY`, `TIMEOUT`, `MAX_RETRIES`, `PROXY_URL`, `HEADLESS`, `SEED`).  
-  > Ver ese archivo para valores y comentarios — no se repiten aquí.
-- **Dependencias**: `requirements.txt`  
-  > Ver ese archivo para versiones exactas.
-- **Capturas & HTML/XHR**:  
-  - Capturas: `artifacts_spa/screenshots/*.png`  
-  - HTML crudo: `artifacts/html/*.html`  
-  - Respuestas XHR/JSON: `artifacts/xhr/*.json`
-- **Robots**:  
-  - `artifacts/robots/robots.txt` (descarga íntegra)  
-  - `artifacts/robots/robots_report.json` (veredicto por *endpoint*)
-- **Datasets esperados**:  
+  (p. ej., `robots.log`, `crawl_index.log`, `parse_series.log`, `spa_scrape.log`). Contienen timestamps, `User-Agent` efectivo, pausas (*Sleeping/backoff*) y errores.
+- **Parámetros**: `source/settings.py`  
+  (`DEFAULT_UA`, `DEFAULT_DELAY_SEC`, `REQUEST_TIMEOUT`, `MAX_RETRIES`, rutas `OUT_DIR`, `LOG_DIR`). *Ver ese archivo para valores exactos.*
+- **Dependencias**: `requirements.txt`. *Ver archivo para versiones exactas.*
+- **Datasets generados** (`OUT_DIR = dataset/`):  
   - `dataset/indicadores_index.csv`  
   - `dataset/series_desempleo.csv`  
   - `dataset/series_recaudacion.csv`  
   - `dataset/spa_dashboard_data.csv`
+- **Resultados de figuras y tablas**:  
+  - Figuras: `results/figs/*.png`  
+  - Tablas: `results/tables/*.csv`  
+  - Resumen: `results/results_snippet.md`
+- **Documento principal**: `docs/memoria.md` (este archivo).
 
 ---
 
