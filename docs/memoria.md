@@ -5,7 +5,7 @@
 **Web origen**: https://observatorio.bps.gub.uy/#/ y páginas institucionales BPS  
 **Dataset (DOI)**: https://doi.org/10.5281/zenodo.17541918  
 **Vídeo**: https://drive.google.com/drive/folders/1WeBU1GibaRapkJ_BqI4K9bRUuO8Dic5F
-**Asignatura**: Tipología y ciclo de vida de los datos· 
+**Asignatura**: Tipología y ciclo de vida de los datos
 **Fecha**: 1/11/2025  
 
 ## 1. Contexto
