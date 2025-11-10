@@ -64,14 +64,14 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
 
 **Figuras**
 
-1. Subsidio por desempleo – Altas (total)  
-   ![Altas desempleo](results/figs/fig_desempleo_altas.png)
-
-2. Subsidio por desempleo – Altas por zona  
-   ![Altas por zona](results/figs/fig_desempleo_zonas.png)
-
-3. Recaudación BPS – Privados/Públicos/Total  
-   ![Recaudación](results/figs/fig_recaudacion.png)
+1. Indices - URLs
+   ![Indices](/docs/imagenes/indices_url.png)
+3. Subsidio por desempleo – Altas (total)  
+   ![Indices](/docs/imagenes/altas_subsidio_desempleo.png)
+4. Recaudacion de la Seguridad Social - Privados/Públicos/Total (Total)  
+   ![Recaudacion](/docs/imagenes/recaudacion.png)
+5. Indicacdores BPS –  BPS en Cifras
+   ![Recaudación](/docs/imagenes/indicadores_bps_en_cifras.png)
 
 ## 7. Propietario y aspectos éticos/legales
 Propietario: BPS (Uruguay).  
