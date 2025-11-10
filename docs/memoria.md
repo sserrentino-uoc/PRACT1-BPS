@@ -4,11 +4,9 @@
 **Repositorio**: https://github.com/sserrentino-uoc/PRACT1-BPS  
 **Web origen**: https://observatorio.bps.gub.uy/#/ y páginas institucionales BPS  
 **Dataset (DOI)**: https://doi.org/10.5281/zenodo.17541918  
-**Vídeo**: [pendiente – enlace en /video/enlace_video.txt]
-
-> **Portada / Metadatos**  
-> Asignatura/Grupo: `Tipología y ciclo de vida de los datos`· Fecha: `1/11/2025`  
-> Enlace al vídeo (Drive UOC): https://drive.google.com/drive/folders/1WeBU1GibaRapkJ_BqI4K9bRUuO8Dic5F
+**Vídeo**: https://drive.google.com/drive/folders/1WeBU1GibaRapkJ_BqI4K9bRUuO8Dic5F
+**Asignatura**: Tipología y ciclo de vida de los datos· 
+**Fecha**: 1/11/2025  
 
 ## 1. Contexto
 El Banco de Previsión Social (BPS) de Uruguay publica indicadores y series relacionadas con la seguridad social. Este proyecto extrae un índice de indicadores y dos series clave (subsidio por desempleo y recaudación), generando un dataset reproducible para análisis posteriores (PRACT2). Se describe la fuente, su fiabilidad institucional y la motivación: disponer de datos limpios y versionados.
