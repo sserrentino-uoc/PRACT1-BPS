@@ -156,9 +156,6 @@ Serrentino Mangino, S., & Mochon Paredes, A. (2025, noviembre 6). Datos estadís
 
 ## 13. Tabla de contribuciones (obligatoria)
 
-> **TODO Completar con iniciales y % aproximado por apartado**  
-> (Ambos deben aparecer en todos los apartados)
-
 | Apartado | S.S.M. | A.M.P. | Notas |
 |---|---:|---:|---|
 | 1. Contexto | `TODO` | `TODO` |  |
@@ -175,5 +172,5 @@ Serrentino Mangino, S., & Mochon Paredes, A. (2025, noviembre 6). Datos estadís
 | Vídeo | `TODO` | `TODO` |  |
 
 > **Firmas**:  
-> - Sebastian Serrentino Mangino — `TODO fecha`  
-> - Alberto Mochón Paredes — `TODO fecha`
+> - Sebastian Serrentino Mangino 
+> - Alberto Mochón Paredes
