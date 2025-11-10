@@ -70,7 +70,7 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
 ## Ética y licencias
 - No se halló `robots.txt` público en `observatorio.bps.gub.uy` ni `www.bps.gub.uy` (ver `logs/robots.log`).
 - Se aplicó *polite crawling*: User-Agent propio, `--delay`, sin login, sin evadir barreras técnicas.
-- Fuente de datos: BPS (Indicadores de la Seguridad Social). Este repo publica un **dataset derivado** (metadatos + series tabulares de XLS) bajo **CC-BY 4.0**, citando a la fuente.
+- Fuente de datos: BPS (Indicadores de la Seguridad Social). Este repo publica un **dataset derivado** (metadatos + series tabulares de XLS) bajo **CC-1.0**, citando a la fuente.
 
 ## Buenas prácticas implementadas
 - **User‑Agent propio**, **retardos** configurables, **timeouts** y **reintentos** exponenciales.
