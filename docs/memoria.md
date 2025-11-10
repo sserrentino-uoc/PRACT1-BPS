@@ -142,15 +142,40 @@ CSVs disponibles en `/dataset`.
 Serrentino Mangino, S., & Mochon Paredes, A. (2025, noviembre 6). Datos estadísticos del Banco de Previsión Social del Uruguay. Zenodo. https://doi.org/10.5281/zenodo.17541918
 
 ## 11. Evidencias y reproducibilidad
-- **Logs** de scraping: `/logs/*.log` (robots, índice, series, SPA).  
-- **Parámetros**: `/source/settings.py` (User-Agent, delays, timeouts).  
-- **Requisitos**: `requirements.txt`.  
-- **Validación**: `python -m source.main validate` (verifica columnas clave y nulos en los CSV obtenidos).
 
-> **TODO Comandos de reproducción rápida (incluye script)**  
-> - `./run_fresh.sh` (repro desde cero).  
-> - Salidas esperadas: `dataset/indicadores_index.csv`, `series_desempleo.csv`, `series_recaudacion.csv`, `spa_dashboard_data.csv`.  
-> - Captura de pantalla / extracto de logs con **User-Agent** y **“Sleeping …”**.
+# 11. Evidencias y reproducibilidad
+
+Esta sección documenta **cómo reproducir** la extracción y **qué evidencias** quedan guardadas automáticamente. No se duplica información ya descrita en otros archivos; donde aplica, se referencia.
+
+---
+
+## 11.1 Artefactos y evidencias
+
+- **Logs de scraping**: `logs/*.log`  
+  Incluyen *robots, índice, series, SPA* con timestamps, niveles (`INFO/WARN/ERROR`), `User-Agent` efectivo, latencias y *backoff*.
+- **Parámetros de ejecución**: `source/settings.py`  
+  (p. ej., `USER_AGENT`, `REQUEST_DELAY`, `TIMEOUT`, `MAX_RETRIES`, `PROXY_URL`, `HEADLESS`, `SEED`).  
+  > Ver ese archivo para valores y comentarios — no se repiten aquí.
+- **Dependencias**: `requirements.txt`  
+  > Ver ese archivo para versiones exactas.
+- **Capturas & HTML/XHR**:  
+  - Capturas: `artifacts_spa/screenshots/*.png`  
+  - HTML crudo: `artifacts/html/*.html`  
+  - Respuestas XHR/JSON: `artifacts/xhr/*.json`
+- **Robots**:  
+  - `artifacts/robots/robots.txt` (descarga íntegra)  
+  - `artifacts/robots/robots_report.json` (veredicto por *endpoint*)
+- **Datasets esperados**:  
+  - `dataset/indicadores_index.csv`  
+  - `dataset/series_desempleo.csv`  
+  - `dataset/series_recaudacion.csv`  
+  - `dataset/spa_dashboard_data.csv`
+
+---
+
+## 11.2 Preparación del entorno
+
+Véase el [README](/README.md) 
 
 ---
 
