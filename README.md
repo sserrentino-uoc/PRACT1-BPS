@@ -57,7 +57,7 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
 
 # 5) Demostracion de SPA (captura de KPIs visibles)
 - python -m source.main spa 
-- 
+  
 # 6) Validación rápida de los datos obtenidos por scrapping
 - python -m source.main validate 
     - Si todo esta ok debe recibir el mensaje: "INFO: ✔✔✔ TODAS LAS VALIDACIONES PASARON ✔✔✔" 
@@ -80,7 +80,6 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
 
 ## Créditos / Propiedad intelectual
 - Autoría del código: integrantes.
-- Terceros: mencionar bibliografía, documentación y paquetes utilizados (licencias). Detallar en la **memoria**.
 
 ## Licencia
 - **DOI**: Serrentino Mangino, S., & Mochon Paredes, A. (2025, octubre 30). Datos estadísticos del Banco de Previsión Social del Uruguay. 
