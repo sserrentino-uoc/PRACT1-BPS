@@ -86,10 +86,6 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
 - SPA: demo_spa.py (Selenium + WebDriverWait) captura 21 azulejos del dashboard; salida tabular en dataset/spa_dashboard_data.csv (≈13×2) y trazas en logs/spa_scrape.log.
 - Validación: validate.py chequea existencia, encabezados y nulos básicos; evidencias en logs/validate.log (si lo ejecutaste) y verificación manual de CSVs.
 
-## 7. Propietario y aspectos éticos/legales
-Propietario: BPS (Uruguay).  
-Actuamos con “scraping responsable”: chequeo de `robots.txt` (ver `/logs/robots.log`), `User-Agent` propio, **rate-limit** (delays), **timeouts**, **reintentos**, y evitamos zonas autenticadas o con captchas. No capturamos datos personales. Uso académico/no comercial. Si `robots.txt` no está disponible (HTTP 404), aplicamos políticas “polite crawling” y monitoreamos carga.
-
 ## 8. Inspiración
 Trabajos previos del BPS y tableros del Observatorio; el dataset busca facilitar análisis reproducibles (PRACT2) sin depender de la navegación manual por múltiples páginas.
 
