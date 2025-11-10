@@ -128,20 +128,20 @@ En el [README](/README.md) se detalla la política de licencias: Datos → CC0 1
 Código en `/source` con CLI (`python -m source.main <subcomando>`).  
 Retos: páginas institucionales heterogéneas (HTML/XLS/XLSX), normalización de formatos, distinguir recursos (sniffing de binario/HTML), y una SPA que requiere Selenium (archivo `demo_spa.py` con waits). Se registran logs en `/logs`.
 
-> **TODO Detalle técnico (breve) de soluciones aplicadas**  
-> - `_engine_from_ext_or_sniff` (detecta xls/xlsx/html/text por “magic bytes”).  
-> - `_read_table_like` con **headers múltiples** y **fallbacks** (`xlrd` manual, `read_html`, BS4, CSV/TSV).  
-> - Promoción automática de cabecera por fila con “Fecha”.  
-> - Normalización numérica con formato latino (`_to_num`).  
-> - Heurística de selección de hoja (**ALTAS > EMISIÓN > PROMEDIO**).  
-> - Selección robusta del XLS correcto para **II Recaudación** (sin exigir extensión).  
-> - Scraping responsable: User-Agent fijo, sleeps, recorte de probes.
+Renderizado asíncrono (SPA): elementos del dashboard tardaban en estar presentes en el DOM.
+Solución: WebDriverWait con condiciones explícitas (p. ej., presence_of_element_located) + try/except para TimeoutException. Se ajustaron locators a selectores estables (clases/atributos) y se registraron los tiempos en spa_scrape.log.
 
-## 10. Dataset y DOI
+Heterogeneidad en XLS institucionales: números con separadores regionales y meses en formatos mixtos.
+Solución: funciones _norm_num() y _norm_mes() en parse_series.py para armonizar valores y obtener columnas anio/mes estandarizadas.
+
+Falta de robots.txt formal (404): riesgo de ambigüedad de permisos.
+Solución: polite crawling explícito (UA propio, DEFAULT_DELAY_SEC, MAX_RETRIES, REQUEST_TIMEOUT en settings.py) + registro exhaustivo en robots.log y documentación en memoria.
+
+## 11. Dataset y DOI
 CSVs disponibles en `/dataset`.
 Serrentino Mangino, S., & Mochon Paredes, A. (2025, noviembre 6). Datos estadísticos del Banco de Previsión Social del Uruguay. Zenodo. https://doi.org/10.5281/zenodo.17541918
 
-## 11. Evidencias y reproducibilidad
+## 12. Evidencias y reproducibilidad
 - **Logs** de scraping: `/logs/*.log` (robots, índice, series, SPA).  
 - **Parámetros**: `/source/settings.py` (User-Agent, delays, timeouts).  
 - **Requisitos**: `requirements.txt`.  
@@ -154,7 +154,7 @@ Serrentino Mangino, S., & Mochon Paredes, A. (2025, noviembre 6). Datos estadís
 
 ---
 
-## 12. Tabla de contribuciones (obligatoria)
+## 13. Tabla de contribuciones (obligatoria)
 
 > **TODO Completar con iniciales y % aproximado por apartado**  
 > (Ambos deben aparecer en todos los apartados)
