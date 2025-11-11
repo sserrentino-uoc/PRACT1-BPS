@@ -89,7 +89,7 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
 
 ## Vídeo (≤10 min)
 - Se incluye una demo corta: `robots → index → (desempleo|recaudacion|asignacion) → dataset → Zenodo`.
-- Coloca el enlace en `video/enlace_video.txt`
+- Vídeo: https://drive.google.com/drive/folders/1WeBU1GibaRapkJ_BqI4K9bRUuO8Dic5F
 
 ## Ética y licencias
 - No se halló `robots.txt` público en `observatorio.bps.gub.uy` ni `www.bps.gub.uy` (ver `logs/robots.log`).
