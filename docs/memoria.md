@@ -36,8 +36,8 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
 ## 5. Contenido (diccionario de datos)
 
 **Periodo temporal (exacto)**
-- `series_desempleo.csv`: 2023-08-01 – 2025-07-01 (mensual, inclusive).
-- `series_recaudacion.csv`: 2023-05-01 – 2025-04-01 (mensual, inclusive).
+- `/dataset/series_desempleo.csv`: 2023-08-01 – 2025-07-01 (mensual, inclusive).
+- `/dataset/series_recaudacion.csv`: 2023-05-01 – 2025-04-01 (mensual, inclusive).
 - 
 **indicadores_index.csv**  
 - `capitulo` (str) — agrupador temático del indicador  
