@@ -87,7 +87,7 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
 - python -m source.main validate 
     - Si todo esta ok debe recibir el mensaje: "INFO: ✔✔✔ TODAS LAS VALIDACIONES PASARON ✔✔✔" 
 
-## Vídeo (≤10 min)
+## Demostracion (≤10 min)
 - Se incluye una demo corta: `robots → index → (desempleo|recaudacion|asignacion) → dataset → Zenodo`.
 - Vídeo: https://drive.google.com/drive/folders/1WeBU1GibaRapkJ_BqI4K9bRUuO8Dic5F
 
