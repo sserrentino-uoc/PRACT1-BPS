@@ -74,13 +74,13 @@ python -m source.main robots
 
 # 3) Índice (páginas institucionales)
 - python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-la-seguridad-social.html" "https://www.bps.gub.uy/bps/observatorio/cuadro.jsp?contentid=12780" --delay 2 --max-pages 3
-- Log: /logs/crawl_index.log
+- Log: [`crawl_index.log`](/logs/crawl_index.log).
 
 # 4) Series (Se deben reemplazar las url's por los enlaces reales del índice)
 - python -m source.main desempleo|recaudacion --xls-url "enlace_real" --sheet "nombre_hoja"
     - python -m source.main desempleo --xls-url "https://www.bps.gub.uy/bps/file/23307/1/iii_3_subsidio-por-desempleo.xls" --sheet "III.3.5 Altas Zona" 
     - python -m source.main recaudacion --xls-url "https://www.bps.gub.uy/bps/file/23304/1/ii_recaudacion.xls" --sheet "II-0"
- - Log: /logs/parse_series.log
+ - Log: [`parse_series.log`](/logs/parse_series.log).
 
 # 5) Demostracion de SPA (captura de KPIs visibles)
 - python -m source.main spa
