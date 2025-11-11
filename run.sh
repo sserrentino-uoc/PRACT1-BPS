@@ -1,6 +1,6 @@
 # Para correr:
-# chmod +x run_fresh.sh
-# ./run_fresh.sh
+# chmod +x run.sh
+# ./run.sh
 
 # 1) Ruta del proyecto 
 PROJ="$HOME/Tipologia/PRACT1-BPS"
