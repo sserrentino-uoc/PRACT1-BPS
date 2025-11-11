@@ -38,7 +38,12 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
 **Periodo temporal (exacto)**
 - `/dataset/series_desempleo.csv`: 2023-08-01 – 2025-07-01 (mensual, inclusive).
 - `/dataset/series_recaudacion.csv`: 2023-05-01 – 2025-04-01 (mensual, inclusive).
-- 
+- `/dataset/spa_dashboard_data.csv`: 
+   - Naturaleza: snapshot de KPIs del dashboard SPA del Observatorio (no es serie temporal).
+   - Período: no aplica. Los valores corresponden al instante de captura.
+   - Evidencia: timestamp de captura registrado en `logs/spa_scrape.log`.
+   - Fuente: https://observatorio.bps.gub.uy/#/
+  
 **indicadores_index.csv**  
 - `capitulo` (str) — agrupador temático del indicador  
 - `titulo_corto` (str) — resumen del indicador  
