@@ -84,7 +84,7 @@ python -m source.main robots
 
 # 5) Demostracion de SPA (captura de KPIs visibles)
 - python -m source.main spa
-- Log: [`LICENSE.md`](/logs/spa_scrape.log).
+- Log: [`spa_scrape.log`](/logs/spa_scrape.log).
   
 # 6) Validación rápida de los datos obtenidos por scrapping
 - python -m source.main validate 
