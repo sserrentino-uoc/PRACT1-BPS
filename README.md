@@ -78,7 +78,8 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
 # 4) Series (Se deben reemplazar las url's por los enlaces reales del índice)
 - python -m source.main desempleo|recaudacion --xls-url "enlace_real" --sheet "nombre_hoja"
     - python -m source.main desempleo --xls-url "https://www.bps.gub.uy/bps/file/23307/1/iii_3_subsidio-por-desempleo.xls" --sheet "III.3.5 Altas Zona" 
-    - python -m source.main recaudacion --xls-url "https://www.bps.gub.uy/bps/file/23304/1/ii_recaudacion.xls" --sheet "II-0" 
+    - python -m source.main recaudacion --xls-url "https://www.bps.gub.uy/bps/file/23304/1/ii_recaudacion.xls" --sheet "II-0"
+ - Log: logs/parse_series.log
 
 # 5) Demostracion de SPA (captura de KPIs visibles)
 - python -m source.main spa 
