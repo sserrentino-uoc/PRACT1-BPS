@@ -94,7 +94,7 @@ python -m source.main robots
     - Si todo esta ok debe recibir el mensaje: "INFO: ✔✔✔ TODAS LAS VALIDACIONES PASARON ✔✔✔" 
 
 ## Demostracion (≤10 min)
-- Vídeo: https://drive.google.com/drive/folders/1WeBU1GibaRapkJ_BqI4K9bRUuO8Dic5F
+- Vídeo: https://drive.google.com/file/d/1po1_n-FKv-BdookM3xCFqIdlpCQZtbVa/view?usp=drive_link
 
 ## Ética y licencias
 - No se halló `robots.txt` público en `observatorio.bps.gub.uy` ni `www.bps.gub.uy` (ver `logs/robots.log`).
