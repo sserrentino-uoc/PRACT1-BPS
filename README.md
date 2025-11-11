@@ -88,9 +88,8 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
     - Si todo esta ok debe recibir el mensaje: "INFO: ✔✔✔ TODAS LAS VALIDACIONES PASARON ✔✔✔" 
 
 ## Vídeo (≤10 min)
-- Incluir una demo corta: `robots → index → (desempleo|recaudacion|asignacion) → dataset → Zenodo`.
-- Ambos integrantes deben aparecer en algún momento.
-- Coloca el enlace en `video/enlace_video.txt` y en la **memoria**.
+- Se incluye una demo corta: `robots → index → (desempleo|recaudacion|asignacion) → dataset → Zenodo`.
+- Coloca el enlace en `video/enlace_video.txt`
 
 ## Ética y licencias
 - No se halló `robots.txt` público en `observatorio.bps.gub.uy` ni `www.bps.gub.uy` (ver `logs/robots.log`).
@@ -107,7 +106,5 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
 - Autoría del código: integrantes.
 
 ## Licencia
-- **DOI**: Serrentino Mangino, S., & Mochon Paredes, A. (2025, octubre 30). Datos estadísticos del Banco de Previsión Social del Uruguay. 
-- **Datos** (`/dataset` y depósito Zenodo): **CC0 1.0** (dominio público). Se agradece citar el DOI: https://doi.org/10.5281/zenodo.17541918  
-- **Código** (`/source`): **MIT**.  Detalles en [`LICENSE.md`](./LICENSE.md).
+Véase [`LICENSE.md`](./LICENSE.md).
 
