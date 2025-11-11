@@ -249,10 +249,10 @@ Véase el [README](/README.md)
 
 ---
 
-## Licenciemiento
+## 12. Licenciamiento
 Véase el [LICENSE](/LICENSE.md) 
 
-## 12. Tabla de contribuciones (obligatoria)
+## 13. Tabla de contribuciones (obligatoria)
 
 | Apartado | S.S.M. | A.M.P. | Notas |
 |---|---:|---:|---|
