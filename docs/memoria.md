@@ -181,7 +181,7 @@ Véase el [README](/README.md)
 |---|---:|---:|---|
 | 1. Investigación previa | `Si` | `Si` | - |
 | 2. Redacción de las respuestas | `-` | `Si` | - |
-| 3. Desarrollo del código | `Si` | `Si` | - |
+| 3. Desarrollo del código | `Si` | `-` | - |
 | 4. Participación en el vídeo | `Si` | `Si` | - |
 
 **Firmas**:  
