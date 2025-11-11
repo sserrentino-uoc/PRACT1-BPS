@@ -101,9 +101,28 @@ Indicadores BPS – BPS en Cifras
 2025-10-30 20:23:38,368 [INFO] [GET ] https://bps.gub.uy/robots.txt -> 404 text/html; charset=iso-8859-1
 2025-10-30 20:23:38,370 [INFO] Si no hay robots.txt público, se aplica 'polite crawling' por defecto.
 ```
-- Crawl índice: crawl_index.py → dataset/indicadores_index.csv (~272×8 en el ZIP) + trazas en logs/crawl_index.log.
+- Crawl índice: crawl_index.py → dataset/indicadores_index.csv (~272×8) + trazas en logs/crawl_index.log.
+```text
+2025-10-30 20:24:18,460 [INFO] Sleeping 2.0s
+2025-10-30 20:26:26,056 [INFO] Sleeping 2.0s
+2025-10-30 20:26:28,154 [INFO] Sleeping 2.0s
+2025-10-30 20:26:30,704 [INFO] Sleeping 2.0s
+...
+2025-11-05 20:04:50,663 [INFO] Escribí 272 filas en dataset/indicadores_index.csv
+```
 - Series: parse_series.py → dataset/series_desempleo.csv y dataset/series_recaudacion.csv (≈24×4), con _norm_num() y _norm_mes() para homogeneizar números y tiempo. Evidencia adicional: logs/parse_series.log (si presente).
+```text
+2025-11-05 20:05:35,463 [INFO] Escribí 24 filas en dataset\series_desempleo.csv
+2025-11-05 20:05:45,621 [INFO] Escribí 24 filas en dataset\series_recaudacion.csv
+```
 - SPA: demo_spa.py (Selenium + WebDriverWait) captura 21 azulejos del dashboard; salida tabular en dataset/spa_dashboard_data.csv (≈13×2) y trazas en logs/spa_scrape.log.
+```text
+2025-11-05 21:22:40,101 [INFO] --- Resultados del Scraping (SPA) ---
+2025-11-05 21:22:40,099 [INFO] - Empresas: 316.134
+2025-11-05 21:22:40,100 [INFO] - Puestos cotizantes: 1.558.570
+2025-11-05 21:22:40,101 [INFO] - Personas cotizantes: 1.334.104
+2025-11-05 21:22:40,101 [INFO] ¡Éxito! Datos guardados en dataset\spa_dashboard_data.csv
+```
 - Validación: validate.py chequea existencia, encabezados y nulos básicos; evidencias en logs/validate.log (si lo ejecutaste) y verificación manual de CSVs.
 
 # 7. Inspiración
