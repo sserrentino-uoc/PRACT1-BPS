@@ -153,8 +153,6 @@ Serrentino Mangino, S., & Mochon Paredes, A. (2025, noviembre 6). Datos estadís
 
 ## 11. Evidencias y reproducibilidad
 
-# 11. Evidencias y reproducibilidad
-
 Esta sección documenta **cómo reproducir** la extracción y **qué evidencias** quedan guardadas automáticamente. No se duplica información ya descrita en otros archivos; donde aplica, se referencia.
 
 ---
@@ -176,6 +174,45 @@ Esta sección documenta **cómo reproducir** la extracción y **qué evidencias*
   - Tablas: `results/tables/*.csv`  
   - Resumen: `results/results_snippet.md`
 - **Documento principal**: `docs/memoria.md` (este archivo).
+
+## 11.2 Resultado y evidencias
+
+**Respeto de robots y “polite crawling”**
+
+```text
+2025-10-30 20:23:38,045 [INFO] [HEAD] https://observatorio.bps.gub.uy/robots.txt -> 404
+2025-10-30 20:23:38,114 [INFO] [GET ] https://observatorio.bps.gub.uy/robots.txt -> 404 text/html; charset=iso-8859-1
+2025-10-30 20:23:38,186 [INFO] [HEAD] https://www.bps.gub.uy/robots.txt -> 404
+2025-10-30 20:23:38,234 [INFO] [GET ] https://www.bps.gub.uy/robots.txt -> 404 text/html; charset=iso-8859-1
+2025-10-30 20:23:38,306 [INFO] [HEAD] https://bps.gub.uy/robots.txt -> 404
+2025-10-30 20:23:38,368 [INFO] [GET ] https://bps.gub.uy/robots.txt -> 404 text/html; charset=iso-8859-1
+2025-10-30 20:23:38,370 [INFO] Si no hay robots.txt público, se aplica 'polite crawling' por defecto.
+Rate-limit y espera deliberada (delays)
+```
+
+```text
+2025-10-30 20:24:18,460 [INFO] Sleeping 2.0s
+2025-10-30 20:26:25,927 [INFO] GET https://www.bps.gub.uy/1944/indicadores-de-la-seguridad-social.html -> 200
+2025-10-30 20:26:26,056 [INFO] Sleeping 2.0s
+2025-10-30 20:26:28,098 [INFO] GET https://www.bps.gub.uy/bps/estadisticas/cuadro.jsp?cuadro=2 -> 200
+2025-10-30 20:26:28,154 [INFO] Sleeping 2.0s
+2025-10-30 20:26:30,479 [INFO] GET https://www.bps.gub.uy/bps/observatorio/cuadro.jsp?contentid=12780 -> 200
+2025-10-30 20:26:30,704 [INFO] Sleeping 2.0s
+User-Agent (configurado en el código)
+```
+
+```text
+UOC-PRACT1/1.0 (sserrentino@uoc.edu)
+Definido en source/settings.py como DEFAULT_UA, usado en las solicitudes HTTP.
+```
+
+Evidencia del scraping de SPA (dashboard Observatorio)
+
+```text
+2025-11-05 21:17:38,044 [INFO] Esperando 30s a que los azulejos sean visibles en https://observatorio.bps.gub.uy/#/...
+2025-11-05 21:17:38,850 [INFO] Encontrados 21 azulejos de datos. Extrayendo...
+2025-11-05 21:17:39,714 [INFO] --- Resultados del Scraping (SPA) ---
+```
 
 ---
 
