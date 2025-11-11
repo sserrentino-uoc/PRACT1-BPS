@@ -190,6 +190,7 @@ Esta sección documenta **cómo reproducir** la extracción y **qué evidencias*
 Rate-limit y espera deliberada (delays)
 ```
 
+**líneas reales con Sleeping (rate-limit)**
 ```text
 2025-10-30 20:24:18,460 [INFO] Sleeping 2.0s
 2025-10-30 20:26:25,927 [INFO] GET https://www.bps.gub.uy/1944/indicadores-de-la-seguridad-social.html -> 200
@@ -200,11 +201,11 @@ Rate-limit y espera deliberada (delays)
 2025-10-30 20:26:30,704 [INFO] Sleeping 2.0s
 User-Agent (configurado en el código)
 ```
-
+**User-Agent configurado**
 UOC-PRACT1/1.0 (sserrentino@uoc.edu)
 Definido en source/settings.py como DEFAULT_UA, usado en las solicitudes HTTP.
 
-Evidencia del scraping de SPA (dashboard Observatorio)
+**Evidencia del scraping de SPA (dashboard Observatorio)**
 
 ```text
 2025-11-05 21:17:38,044 [INFO] Esperando 30s a que los azulejos sean visibles en https://observatorio.bps.gub.uy/#/...
