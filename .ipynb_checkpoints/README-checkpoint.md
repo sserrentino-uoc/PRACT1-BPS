@@ -1,6 +1,8 @@
 # PRACT1-BPS (Web Scraping)
 **Materia - M2.851 - Tipología y ciclo de vida de los datos - Aula 4**
-**Proyecto de la práctica 1 -  — Observatorio BPS.**
+
+**Proyecto de la práctica 1 - Observatorio BPS – Indicadores SS y Series (Desempleo, Recaudación).**
+
 **Última actualización:** 2025-10-31
 
 ## Integrantes
@@ -32,9 +34,34 @@
 
 ## Uso rápido
 
-# 1) Entorno
-python -m venv .venv && . .venv/bin/activate   # Windows: .venv\Scripts\activate
+## 1) Entorno (Linux/macOS y Windows)
+
+> Requisito: Python 3.x instalado. Se recomienda 3.10+.
+
+### Linux / macOS (bash/zsh)
+```bash
+# crear entorno virtual
+python3 -m venv .venv
+
+# activar
+source .venv/bin/activate
+
+# actualizar pip e instalar dependencias
+python -m pip install --upgrade pip
 pip install -r requirements.txt
+```
+### Windows
+```bash
+# crear entorno virtual
+py -m venv .venv
+
+# activar
+.\.venv\Scripts\Activate.ps1
+
+# actualizar pip e instalar dependencias
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
 
 # 1.1) Navegador Chrome y Driver
 
@@ -45,32 +72,34 @@ pip install -r requirements.txt
     - Fuente Chrome:= https://storage.googleapis.com/chrome-for-testing-public/142.0.7444.61/win64/chrome-win64.zip
 
 # 2) Chequeo robots (log informativo), verifica los archivos robots.txt de los dominios objetivo (TARGETS).
+```bash
 python -m source.main robots
-
+```
 # 3) Índice (páginas institucionales)
-python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-la-seguridad-social.html" "https://www.bps.gub.uy/bps/observatorio/cuadro.jsp?contentid=12780" --delay 2 --max-pages 3
+- python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-la-seguridad-social.html" "https://www.bps.gub.uy/bps/observatorio/cuadro.jsp?contentid=12780" --delay 2 --max-pages 3
+- Log: [`crawl_index.log`](/logs/crawl_index.log).
 
 # 4) Series (Se deben reemplazar las url's por los enlaces reales del índice)
 - python -m source.main desempleo|recaudacion --xls-url "enlace_real" --sheet "nombre_hoja"
     - python -m source.main desempleo --xls-url "https://www.bps.gub.uy/bps/file/23307/1/iii_3_subsidio-por-desempleo.xls" --sheet "III.3.5 Altas Zona" 
-    - python -m source.main recaudacion --xls-url "https://www.bps.gub.uy/bps/file/23304/1/ii_recaudacion.xls" --sheet "II-0" 
+    - python -m source.main recaudacion --xls-url "https://www.bps.gub.uy/bps/file/23304/1/ii_recaudacion.xls" --sheet "II-0"
+ - Log: [`parse_series.log`](/logs/parse_series.log).
 
 # 5) Demostracion de SPA (captura de KPIs visibles)
-- python -m source.main spa 
-- 
+- python -m source.main spa
+- Log: [`spa_scrape.log`](/logs/spa_scrape.log).
+  
 # 6) Validación rápida de los datos obtenidos por scrapping
 - python -m source.main validate 
     - Si todo esta ok debe recibir el mensaje: "INFO: ✔✔✔ TODAS LAS VALIDACIONES PASARON ✔✔✔" 
 
-## Vídeo (≤10 min)
-- Incluir una demo corta: `robots → index → (desempleo|recaudacion|asignacion) → dataset → Zenodo`.
-- Ambos integrantes deben aparecer en algún momento.
-- Coloca el enlace en `video/enlace_video.txt` y en la **memoria**.
+## Demostracion (≤10 min)
+- Vídeo: https://drive.google.com/drive/folders/1WeBU1GibaRapkJ_BqI4K9bRUuO8Dic5F
 
 ## Ética y licencias
 - No se halló `robots.txt` público en `observatorio.bps.gub.uy` ni `www.bps.gub.uy` (ver `logs/robots.log`).
 - Se aplicó *polite crawling*: User-Agent propio, `--delay`, sin login, sin evadir barreras técnicas.
-- Fuente de datos: BPS (Indicadores de la Seguridad Social). Este repo publica un **dataset derivado** (metadatos + series tabulares de XLS) bajo **CC-BY 4.0**, citando a la fuente.
+- Fuente de datos: BPS (Indicadores de la Seguridad Social). Este repo publica un **dataset derivado** (metadatos + series tabulares de XLS) bajo **CC-1.0**, citando a la fuente.
 
 ## Buenas prácticas implementadas
 - **User‑Agent propio**, **retardos** configurables, **timeouts** y **reintentos** exponenciales.
@@ -78,12 +107,7 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
 - **Modularidad** del código y **comentarios** concisos.
 - **Limitaciones conocidas**: algunos servidores bloquean `HEAD`; se usa fallback GET controlado. Páginas con iframes/JS pueden requerir estrategia alternativa.
 
-## Créditos / Propiedad intelectual
+# 7) Propiedad intelectual y Licencia
 - Autoría del código: integrantes.
-- Terceros: mencionar bibliografía, documentación y paquetes utilizados (licencias). Detallar en la **memoria**.
-
-## Licencia
-- **DOI**: Serrentino Mangino, S., & Mochon Paredes, A. (2025, octubre 30). Datos estadísticos del Banco de Previsión Social del Uruguay. 
-- **Datos** (`/dataset` y depósito Zenodo): **CC0 1.0** (dominio público). Se agradece citar el DOI: https://doi.org/10.5281/zenodo.17541918  
-- **Código** (`/source`): **MIT**.  Detalles en [`LICENSE.md`](./LICENSE.md).
+- Licencia en: [`LICENSE.md`](./LICENSE.md).
 

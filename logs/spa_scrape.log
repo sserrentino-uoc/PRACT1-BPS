@@ -65,3 +65,24 @@ Symbols not available. Dumping unresolved backtrace:
 2025-11-05 21:22:40,101 [INFO] ¡Éxito! Datos guardados en dataset\spa_dashboard_data.csv
 2025-11-05 21:22:40,101 [INFO] Cerrando el driver de Selenium...
 2025-11-05 21:22:42,378 [INFO] Driver cerrado.
+2025-11-11 16:59:44,404 [INFO] Driver de Selenium (Chrome) iniciado.
+2025-11-11 16:59:46,416 [INFO] Esperando 30s a que los azulejos sean visibles en https://observatorio.bps.gub.uy/#/...
+2025-11-11 16:59:49,841 [INFO] Encontrados 21 azulejos de datos. Extrayendo...
+2025-11-11 16:59:51,864 [INFO] --- Resultados del Scraping (SPA) ---
+2025-11-11 16:59:51,867 [INFO] - Prestaciones: 1.390.172
+2025-11-11 16:59:51,868 [INFO] - Jubilaciones: 506.111
+2025-11-11 16:59:51,870 [INFO] - Pensiones sobrevivencia: 224.587
+2025-11-11 16:59:51,871 [INFO] - Subsidio por desempleo: 41.156
+2025-11-11 16:59:51,872 [INFO] - Pensiones asistenciales: 96.666
+2025-11-11 16:59:51,873 [INFO] - Subsidio por enfermedad: 55.851
+2025-11-11 16:59:51,874 [INFO] - Asignaciones familiares: 461.824
+2025-11-11 16:59:51,875 [INFO] - Subsidio por maternidad: 3.977
+2025-11-11 16:59:51,876 [INFO] - Recaudación: 19.687
+2025-11-11 16:59:51,877 [INFO] - Empresas: 316.134
+2025-11-11 16:59:51,878 [INFO] - Puestos cotizantes: 1.558.570
+2025-11-11 16:59:51,879 [INFO] - Personas cotizantes: 1.334.104
+2025-11-11 16:59:51,880 [INFO] - Régimen general: 5.059
+2025-11-11 16:59:51,882 [INFO] ---------------------------------------
+2025-11-11 16:59:51,883 [INFO] ¡Éxito! Datos guardados en dataset\spa_dashboard_data.csv
+2025-11-11 16:59:51,884 [INFO] Cerrando el driver de Selenium...
+2025-11-11 16:59:54,739 [INFO] Driver cerrado.

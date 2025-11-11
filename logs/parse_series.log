@@ -357,3 +357,15 @@
 2025-11-05 20:05:45,607 [INFO] Columnas pre-limpieza: ['Unnamed: 0', 'Unnamed: 1', 'Fecha', 'Privados', 'Públicos', 'Total', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Promedio ', 'Variación']
 2025-11-05 20:05:45,608 [INFO] Columnas post-limpieza: ['Fecha', 'Privados', 'Públicos', 'Total', 'Promedio ', 'Variación']
 2025-11-05 20:05:45,621 [INFO] Escribí 24 filas en dataset\series_recaudacion.csv
+2025-11-11 16:59:13,828 [INFO] Descargado https://www.bps.gub.uy/bps/file/23307/1/iii_3_subsidio-por-desempleo.xls -> 2138624 bytes | Content-Type=application/vnd.ms-excel;charset=UTF-8
+2025-11-11 16:59:13,838 [INFO] Detección de formato: kind=xls engine=xlrd
+2025-11-11 16:59:13,989 [INFO] Excel OK: hoja=III.3.5 Altas Zona header=7 cols=['Fecha', 'Montevideo', 'Interior', 'Unnamed: 6', 'Total', 'Unnamed: 10']
+2025-11-11 16:59:13,995 [INFO] Columnas pre-limpieza: ['Fecha', 'Montevideo', 'Interior', 'Unnamed: 6', 'Total', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Promedio ', 'Variación']
+2025-11-11 16:59:13,997 [INFO] Columnas post-limpieza: ['Fecha', 'Montevideo', 'Interior', 'Total', 'Promedio ', 'Variación']
+2025-11-11 16:59:14,057 [INFO] Escribí 24 filas en dataset\series_desempleo.csv
+2025-11-11 16:59:18,316 [INFO] Descargado https://www.bps.gub.uy/bps/file/23304/1/ii_recaudacion.xls -> 810496 bytes | Content-Type=application/vnd.ms-excel;charset=UTF-8
+2025-11-11 16:59:18,318 [INFO] Detección de formato: kind=xls engine=xlrd
+2025-11-11 16:59:18,458 [INFO] Excel OK: hoja=II-0 header=6 cols=['Fecha', 'Privados', 'Públicos', 'Total', 'col_4', 'col_5']
+2025-11-11 16:59:18,464 [INFO] Columnas pre-limpieza: ['Fecha', 'Privados', 'Públicos', 'Total', 'col_4', 'col_5', 'col_6', 'Promedio', 'Variación']
+2025-11-11 16:59:18,466 [INFO] Columnas post-limpieza: ['Fecha', 'Privados', 'Públicos', 'Total', 'col_4', 'col_5', 'col_6', 'Promedio', 'Variación']
+2025-11-11 16:59:18,520 [INFO] Escribí 24 filas en dataset\series_recaudacion.csv

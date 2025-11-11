@@ -1,6 +1,8 @@
 # PRACT1-BPS (Web Scraping)
 **Materia - M2.851 - Tipología y ciclo de vida de los datos - Aula 4**
-**Proyecto de la práctica 1 -  — Observatorio BPS.**
+
+**Proyecto de la práctica 1 - Observatorio BPS – Indicadores SS y Series (Desempleo, Recaudación).**
+
 **Última actualización:** 2025-10-31
 
 ## Integrantes
@@ -70,8 +72,9 @@ pip install -r requirements.txt
     - Fuente Chrome:= https://storage.googleapis.com/chrome-for-testing-public/142.0.7444.61/win64/chrome-win64.zip
 
 # 2) Chequeo robots (log informativo), verifica los archivos robots.txt de los dominios objetivo (TARGETS).
+```bash
 python -m source.main robots
-
+```
 # 3) Índice (páginas institucionales)
 - python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-la-seguridad-social.html" "https://www.bps.gub.uy/bps/observatorio/cuadro.jsp?contentid=12780" --delay 2 --max-pages 3
 - Log: [`crawl_index.log`](/logs/crawl_index.log).
