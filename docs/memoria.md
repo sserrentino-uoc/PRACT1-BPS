@@ -201,10 +201,8 @@ Rate-limit y espera deliberada (delays)
 User-Agent (configurado en el código)
 ```
 
-```text
 UOC-PRACT1/1.0 (sserrentino@uoc.edu)
 Definido en source/settings.py como DEFAULT_UA, usado en las solicitudes HTTP.
-```
 
 Evidencia del scraping de SPA (dashboard Observatorio)
 
