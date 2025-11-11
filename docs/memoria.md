@@ -245,10 +245,12 @@ Definido en source/settings.py como DEFAULT_UA, usado en las solicitudes HTTP.
 ---
 
 ## 11.2 Preparación del entorno
-
 Véase el [README](/README.md) 
 
 ---
+
+## Licenciemiento
+Véase el [LICENSE](/LICENSE.md) 
 
 ## 12. Tabla de contribuciones (obligatoria)
 
