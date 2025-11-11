@@ -84,14 +84,13 @@ python -m source.main robots
 
 # 5) Demostracion de SPA (captura de KPIs visibles)
 - python -m source.main spa
-- Log: /logs/spa_scrape.log
+- Log: [`LICENSE.md`](/logs/spa_scrape.log).
   
 # 6) Validación rápida de los datos obtenidos por scrapping
 - python -m source.main validate 
     - Si todo esta ok debe recibir el mensaje: "INFO: ✔✔✔ TODAS LAS VALIDACIONES PASARON ✔✔✔" 
 
 ## Demostracion (≤10 min)
-- Se incluye una demo corta: `robots → index → (desempleo|recaudacion|asignacion) → dataset → Zenodo`.
 - Vídeo: https://drive.google.com/drive/folders/1WeBU1GibaRapkJ_BqI4K9bRUuO8Dic5F
 
 ## Ética y licencias
