@@ -102,9 +102,7 @@ python -m source.main index --pages "https://www.bps.gub.uy/1944/indicadores-de-
 - **Modularidad** del código y **comentarios** concisos.
 - **Limitaciones conocidas**: algunos servidores bloquean `HEAD`; se usa fallback GET controlado. Páginas con iframes/JS pueden requerir estrategia alternativa.
 
-## Créditos / Propiedad intelectual
+# 7) Propiedad intelectual y Licencia
 - Autoría del código: integrantes.
-
-## Licencia
-Véase [`LICENSE.md`](./LICENSE.md).
+- Licencia en: [`LICENSE.md`](./LICENSE.md).
 
