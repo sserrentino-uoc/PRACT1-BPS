@@ -1,3 +1,6 @@
+# Copyright (c) 2025 Serrentino Mangino, S., & Mochon Paredes, A.
+# Licensed under the MIT License. See LICENSE for details.
+
 """
 Punto de entrada principal para el proyecto de scraping del BPS.
 ... (resto de tu docstring de módulo) ...
@@ -8,11 +11,12 @@ import argparse
 import sys
 
 # 3. Importaciones locales (de tu proyecto)
-from .settings import BASE_INDEX_PAGES, DEFAULT_DELAY_SEC
+from .settings import BASE_INDEX_PAGES, DEFAULT_DELAY_SEC, DEFAULT_UA
 from .robots_check import check_all
 from .crawl_index import crawl_index
 from .parse_series import parse_desempleo, parse_recaudacion
 from .demo_spa import scrape_spa_dashboard
+from .auto_series import run_auto
 # --- 1. AÑADE LA IMPORTACIÓN DE VALIDATE ---
 from .validate import main as validate_main  # Renombramos 'main' a 'validate_main'
 
@@ -32,14 +36,10 @@ def main() -> None:
         required=True,
         help="Comando a ejecutar"
     )
-
-    # --- Comando 'robots' ---
     p_robots = sub.add_parser(
         "robots", 
         help="Verifica robots.txt en hosts relevantes"
     )
-
-    # --- Comando 'index' ---
     p_index = sub.add_parser(
         "index", 
         help="Crawlea el índice y genera indicadores_index.csv"
@@ -56,8 +56,6 @@ def main() -> None:
         "--max-pages", type=int, default=10,
         help="Máximo de sub-páginas a explorar por cada página de índice."
     )
-
-    # --- Comando 'desempleo' ---
     p_des = sub.add_parser(
         "desempleo", 
         help="Descarga y parsea XLS de III.3 Subsidio por desempleo"
@@ -70,8 +68,6 @@ def main() -> None:
         "--sheet", default=None, type=str,
         help="Nombre o índice (base 0) de la hoja a parsear (opcional)."
     )
-
-    # --- Comando 'recaudacion' ---
     p_rec = sub.add_parser(
         "recaudacion", 
         help="Descarga y parsea XLS de II. Recaudación"
@@ -84,25 +80,21 @@ def main() -> None:
         "--sheet", default=None, type=str,
         help="Nombre o índice (base 0) de la hoja a parsear (opcional)."
     )
-    
-    # --- Comando 'spa' ---
     p_spa = sub.add_parser(
         "spa",
         help="Extrae datos del dashboard principal de la SPA (Observatorio)"
     )
-    
-    # --- 2. AÑADE EL SUB-COMANDO 'validate' ---
+    p_auto = sub.add_parser(
+        "auto",
+        help="Lee dataset/indicadores_index.csv y ejecuta desempleo+recaudación con el último XLS por capítulo."
+    )
     p_val = sub.add_parser(
         "validate",
         help="Valida que todos los archivos CSV generados sean correctos."
     )
-    
-    
-    # Parsea los argumentos de la línea de comandos
-    args: argparse.Namespace = ap.parse_args()
 
-    # --- Lógica de Despacho (Dispatch) ---
-    
+    args: argparse.Namespace = ap.parse_args()
+   
     if args.cmd == "robots":
         check_all()
         
@@ -112,7 +104,6 @@ def main() -> None:
             delay=args.delay, 
             max_pages=args.max_pages
         )
-    
     elif args.cmd == "desempleo":
         parse_desempleo(args.xls_url, sheet=args.sheet)
 
@@ -122,7 +113,9 @@ def main() -> None:
     elif args.cmd == "spa":
         scrape_spa_dashboard()
         
-    # --- 3. AÑADE LA LLAMADA A LA FUNCIÓN DE VALIDACIÓN ---
+    elif args.cmd == "auto":
+        run_auto()
+
     elif args.cmd == "validate":
         validate_main()
 
