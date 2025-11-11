@@ -11,20 +11,20 @@
 **Figuras**
 
 1. Subsidio por desempleo – Altas (total)  
-   ![Altas desempleo](results/figs/fig_desempleo_altas.png)
+   ![Altas desempleo](/results/figs/fig_desempleo_altas.png)
 2. Subsidio por desempleo – Altas por zona  
-   ![Altas por zona](results/figs/fig_desempleo_zonas.png)
+   ![Altas por zona](/results/figs/fig_desempleo_zonas.png)
 3. Recaudación BPS – Privados/Públicos/Total  
-   ![Recaudación](results/figs/fig_recaudacion.png)
+   ![Recaudación](/results/figs/fig_recaudacion.png)
 
 ## Indicadores (visión general)
 
 1. Recursos por capítulo  
-   ![Por capítulo](results/figs/fig_indicadores_por_capitulo.png)
+   ![Por capítulo](/results/figs/fig_indicadores_por_capitulo.png)
 2. Distribución por tipo de archivo  
-   ![Por tipo](results/figs/fig_indicadores_tipo.png)
+   ![Por tipo](/results/figs/fig_indicadores_tipo.png)
 3. Publicaciones por mes  
-   ![Timeline](results/figs/fig_publicaciones_tiempo.png)
+   ![Timeline](/results/figs/fig_publicaciones_tiempo.png)
 
 **Top 10 indicadores más recientes**
 
