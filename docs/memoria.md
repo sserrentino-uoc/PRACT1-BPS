@@ -179,10 +179,10 @@ Véase el [README](/README.md)
 
 | Apartado | S.S.M. | A.M.P. | Notas |
 |---|---:|---:|---|
-| 1. Investigación previa | `Si` | `Si` | - |
-| 2. Redacción de las respuestas | `-` | `Si` | - |
-| 3. Desarrollo del código | `Si` | `-` | - |
-| 4. Participación en el vídeo | `Si` | `Si` | - |
+| 1. Investigación previa | `70%` | `30%` | - |
+| 2. Redacción de las respuestas | `20%` | `80%` | - |
+| 3. Desarrollo del código | `80%` | `20%` | - |
+| 4. Participación en el vídeo | `50%` | `50%` | - |
 
 **Firmas**:  
 - Sebastian Serrentino Mangino (S.S.M.)
