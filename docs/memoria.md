@@ -91,6 +91,14 @@ Indicadores BPS – BPS en Cifras
     
 **Resultados**
 - Ética / robots.txt: robots_check.py registra 404 para robots en dominios consultados → se aplica polite crawling (UA propio, espera ≈2s, reintentos). Evidencia: logs/robots.log.
+- ```text
+2025-10-30 20:23:38,045 [INFO] [HEAD] https://observatorio.bps.gub.uy/robots.txt -> 404
+2025-10-30 20:23:38,114 [INFO] [GET ] https://observatorio.bps.gub.uy/robots.txt -> 404 text/html; charset=iso-8859-1
+2025-10-30 20:23:38,186 [INFO] [HEAD] https://www.bps.gub.uy/robots.txt -> 404
+2025-10-30 20:23:38,234 [INFO] [GET ] https://www.bps.gub.uy/robots.txt -> 404 text/html; charset=iso-8859-1
+2025-10-30 20:23:38,306 [INFO] [HEAD] https://bps.gub.uy/robots.txt -> 404
+2025-10-30 20:23:38,368 [INFO] [GET ] https://bps.gub.uy/robots.txt -> 404 text/html; charset=iso-8859-1
+2025-10-30 20:23:38,370 [INFO] Si no hay robots.txt público, se aplica 'polite crawling' por defecto.```
 - Crawl índice: crawl_index.py → dataset/indicadores_index.csv (~272×8 en el ZIP) + trazas en logs/crawl_index.log.
 - Series: parse_series.py → dataset/series_desempleo.csv y dataset/series_recaudacion.csv (≈24×4), con _norm_num() y _norm_mes() para homogeneizar números y tiempo. Evidencia adicional: logs/parse_series.log (si presente).
 - SPA: demo_spa.py (Selenium + WebDriverWait) captura 21 azulejos del dashboard; salida tabular en dataset/spa_dashboard_data.csv (≈13×2) y trazas en logs/spa_scrape.log.
