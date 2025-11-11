@@ -65,19 +65,19 @@ Granularidad temporal mensual; unidad y definiciones según BPS (sin datos perso
 **Figuras**
 Indices - URLs
    
-    ![Indices](/docs/imagenes/indices_url.png)
+   ![Indices](/docs/imagenes/indices_url.png)
 
 Subsidio por desempleo – Altas (total)
    
-    ![Indices](/docs/imagenes/altas_subsidio_desempleo.png)
+   ![Indices](/docs/imagenes/altas_subsidio_desempleo.png)
 
 Recaudacion de la Seguridad Social - Privados/Públicos/Total (Total)
    
-    ![Recaudacion](/docs/imagenes/recaudacion.png)
+   ![Recaudacion](/docs/imagenes/recaudacion.png)
 
 Indicadores BPS – BPS en Cifras
    
-    ![Recaudación](/docs/imagenes/indicadores_bps_en_cifras.png)
+   ![Recaudación](/docs/imagenes/indicadores_bps_en_cifras.png)
     
 **Resultados**
 - Ética / robots.txt: robots_check.py registra 404 para robots en dominios consultados → se aplica polite crawling (UA propio, espera ≈2s, reintentos). Evidencia: logs/robots.log.
