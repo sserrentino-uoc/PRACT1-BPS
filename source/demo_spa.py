@@ -4,14 +4,12 @@
 """
 Script de demostración para scraping de una SPA (Single Page Application)
 usando Selenium.
-
-... (resto de tu docstring de módulo) ...
 """
 
 # 1. Importaciones de la biblioteca estándar
 import time
 import csv
-import logging  # <-- AÑADIDO: Para type hints
+import logging
 from typing import List, Tuple, Dict
 from pathlib import Path
 
@@ -26,8 +24,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 
 # 3. Importaciones locales
-from .settings import OUT_DIR, LOG_DIR  # <-- AÑADIDO LOG_DIR
-from .utils import ensure_dirs, make_logger  # <-- AÑADIDO make_logger
+from .settings import OUT_DIR, LOG_DIR
+from .utils import ensure_dirs, make_logger 
 
 
 # --- Constantes ---
@@ -105,7 +103,7 @@ def scrape_spa_dashboard():
     """
     # --- 1. Configuración de Logger y Archivos ---
     ensure_dirs(OUT_DIR, LOG_DIR)
-    logger = make_logger(LOG_DIR, "spa_scrape")  # <-- AÑADIDO
+    logger = make_logger(LOG_DIR, "spa_scrape")
     output_path = OUT_DIR / "spa_dashboard_data.csv"
 
     driver: WebDriver | None = None
@@ -114,7 +112,7 @@ def scrape_spa_dashboard():
         driver = setup_driver()
         logger.info("Driver de Selenium (Chrome) iniciado.")
         
-        todos_los_datos = fetch_all_tiles(driver, URL_TARGET, logger) # <-- Pasa el logger
+        todos_los_datos = fetch_all_tiles(driver, URL_TARGET, logger) 
         
         logger.info("--- Resultados del Scraping (SPA) ---")
         
@@ -123,13 +121,12 @@ def scrape_spa_dashboard():
             logger.info("---------------------------------------")
             return
 
-        # --- 3. Escritura de CSV ---
         with open(output_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(["indicador", "valor"])
             
             for titulo, valor in todos_los_datos.items():
-                logger.info(f"- {titulo}: {valor}") # <-- REEMPLAZA PRINT
+                logger.info(f"- {titulo}: {valor}") 
                 writer.writerow([titulo, valor])
         
         logger.info("---------------------------------------")
@@ -145,7 +142,6 @@ def scrape_spa_dashboard():
             logger.info("Cerrando el driver de Selenium...")
             driver.quit()
             logger.info("Driver cerrado.")
-
-# ----- EL SCRIPT AÚN PUEDE EJECUTARSE SOLO -----
+            
 if __name__ == "__main__":
     scrape_spa_dashboard()

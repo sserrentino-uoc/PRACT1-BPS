@@ -1,3 +1,6 @@
+# Copyright (c) 2025 Serrentino Mangino, S., & Mochon Paredes, A.
+# Licensed under the MIT License. See LICENSE for details.
+
 import os, time, logging, re
 import urllib.parse as up
 import requests

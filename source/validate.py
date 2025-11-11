@@ -171,7 +171,7 @@ def main():
     path_index = "dataset/indicadores_index.csv"
     path_desempleo = "dataset/series_desempleo.csv"
     path_recaudacion = "dataset/series_recaudacion.csv"
-    path_spa = "dataset/spa_dashboard_data.csv"  # <-- AÑADIDO
+    path_spa = "dataset/spa_dashboard_data.csv" 
 
     # Definir métricas/indicadores requeridos para cada archivo
     # (Tus datos de ejemplo mostraron 'RecaudaciÃ³n' por un problema
@@ -183,14 +183,13 @@ def main():
     spa_indicadores_req = {
         "Prestaciones", "Jubilaciones", "Recaudación", 
         "Empresas", "Régimen general"
-    } # <-- AÑADIDO
-
+    }
     # Ejecutamos las validaciones
     results = [
         val_index(path_index),
         val_series(path_desempleo, desempleo_cols_req),
         val_series(path_recaudacion, recaudacion_cols_req),
-        val_spa(path_spa, spa_indicadores_req)  # <-- AÑADIDO
+        val_spa(path_spa, spa_indicadores_req)  
     ]
     
     logging.info("--- Validaciones terminadas ---")
@@ -201,7 +200,7 @@ def main():
         failed_count = results.count(False)
         total_count = len(results)
         logging.error(f"✘✘✘ Han fallado {failed_count} de {total_count} validaciones. ✘✘✘")
-        sys.exit(1) # Salir con código de error si algo falla
+        sys.exit(1) 
 
 if __name__ == "__main__":
     main()
